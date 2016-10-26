@@ -6,7 +6,7 @@ var myApp = angular.module('myApp', [
   'myApp.view2',
   'angular.filter',
   //'myApp.version',
-  'ngMessages',
+  'ngMessages'
 ]);
 
 myApp.config(function($routeProvider) {

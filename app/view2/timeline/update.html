@@ -1,0 +1,24 @@
+<span class="time"><i class="fa fa-clock-o"></i> {{item.displayTime}}</span>
+
+<h3 class="timeline-header" ng-show="item.timelineType=='update'">New crisis update</h3>
+
+<div class="timeline-body">
+    <p ng-show="item.timelineType=='update'">An update for <b>{{item.incident.name}}</b> at <b>{{item.incident.location}}</b>
+        was reported by <b>{{item.agency.name}}</b>.</p>
+    <p class="timeline-item-detail timeline-item-updated-severity-title">Updated Severity:
+        <div class="timeline-item-detail timeline-item-updated-severity">
+            <input type="radio" name="{{'incident' + item.incident.id + 'update' + item.id + 'sev1'}}" class="flat-red" ng-checked="item.incident.severity >= 1" disabled>
+            <input type="radio" name="{{'incident' + item.incident.id + 'update' + item.id + 'sev2'}}" class="flat-red" ng-checked="item.incident.severity >= 2" disabled>
+            <input type="radio" name="{{'incident' + item.incident.id + 'update' + item.id + 'sev3'}}" class="flat-red" ng-checked="item.incident.severity >= 3" disabled>
+            <input type="radio" name="{{'incident' + item.incident.id + 'update' + item.id + 'sev4'}}" class="flat-red" ng-checked="item.incident.severity >= 4" disabled>
+            <input type="radio" name="{{'incident' + item.incident.id + 'update' + item.id + 'sev5'}}" class="flat-red" ng-checked="item.incident.severity >= 5" disabled>
+        </div>
+    </p>
+    <div style="clear: both;"></div>
+    <p class="timeline-item-detail">Details:</p>
+    <div class="timeline-item-photo" ng-show="item['photo_url'] && item['photo_url'].length > 0">
+        <img src="{{item['photo_url']}}" >
+    </div>
+    <p class="timeline-item-detail-content">{{item.description}}</p>
+</div>
+<div class="timeline-footer"></div>

@@ -1,0 +1,47 @@
+
+<div class="login-box">
+    <div class="login-logo">
+        <a><b>CMS</b><p>Crisis Management System</p></a>
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <form ng-submit="doLogin()">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Username" ng-model="loginData.username">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password" ng-model="loginData.password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <!--<div class="col-xs-8">-->
+                <!--<div class="checkbox icheck">-->
+                <!--<label>-->
+                <!--<input id="rmbme" type="checkbox"> Remember Me-->
+                <!--</label>-->
+                <!--</div>-->
+                <!--</div>&lt;!&ndash; /.col &ndash;&gt;-->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div><!-- /.col -->
+            </div>
+        </form>
+
+    </div><!-- /.login-box-body -->
+    <div class="callout callout-danger" ng-show="errorMsg">
+        <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+        <p>{{errorMsg}}</p>
+    </div>
+    <div class="callout callout-success" ng-show="successMsg">
+        <h4><i class="icon fa fa-check"></i> Congratulations!</h4>
+        <p>{{successMsg}}</p>
+    </div>
+</div><!-- /.login-box -->
+
+<!-- Bootstrap 3.3.5 -->
+<script src="../bower_components/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../bower_components/admin-lte/plugins/iCheck/icheck.min.js"></script>
+<!-- Custom script -->
+<script src="scripts/controllers/js/login.js"></script>

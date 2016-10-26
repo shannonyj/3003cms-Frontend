@@ -1,0 +1,141 @@
+<div class="wrapper">
+    <div>
+        <header class="main-header">
+            <!-- Logo -->
+            <a class="logo" style="">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">CMS</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">Crisis Management System</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+            </nav>
+        </header></div>
+</div>
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Create Crisis Report
+        <small></small>
+    </h1>
+    <!--</ol>-->
+</section>
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box box-primary">
+                    <div class="box-body no-padding">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-8">
+                                <div class="pad" ng-app="tbcCmsFrontApp" ng-controller="CreateCrisisCtrl">
+                                    <!-- form start -->
+                                    <form role="form">
+                                        <div class="box-body">
+                                            <!--{{report}}-->
+
+                                            <div class="form-group">
+                                                <label for="eventType">Event Type</label>
+                                                <select id="eventType" class="form-control select2" style="width: 100%;" ng-model="report.type">
+                                                    <option ng-repeat="incidentType in incidentTypes | orderBy:'title'" value="{{incidentType.value}}">{{incidentType.title}}</option>
+                                                </select>
+                                            </div><!-- /.form-group -->
+                                            <div class="form-group">
+                                                <label for="eventName">Event Name</label>
+                                                <input type="text" class="form-control" id="eventName" placeholder="Enter event name" ng-model="report.name">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Severity</label>
+                                                <div id="severity">
+                                                    <input type="radio" name="sev1" class="flat-red">
+                                                    <input type="radio" name="sev2" class="flat-red">
+                                                    <input type="radio" name="sev3" class="flat-red">
+                                                    <input type="radio" name="sev4" class="flat-red">
+                                                    <input type="radio" name="sev5" class="flat-red">
+                                                </div>
+                                            </div>
+
+                                            <input type="text" id="severityHidden" ng-model="report.severity" style="display: none">
+
+                                            <!-- time Picker -->
+                                            <div class="form-group">
+                                                <label for="timePicker">Time</label>
+                                                <div class="bootstrap-timepicker">
+                                                    <div class="input-group">
+                                                        <input type="text" id="timePicker" class="form-control timepicker">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-clock-o"></i>
+                                                        </div>
+                                                    </div><!-- /.input group -->
+                                                </div>
+                                                <input type="text" id="timeHidden" ng-model="report.time" style="display: none">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="locationAddress">Location</label>
+                                                <select class="form-control" id="locationAddress"></select>
+                                            </div>
+
+                                            <input type="text" id="locationHidden" ng-model="report.location" style="display: none">
+                                            <input type="text" id="locationlngHidden" ng-model="report.longitude" style="display: none">
+                                            <input type="text" id="locationlatHidden" ng-model="report.latitude" style="display: none">
+
+                                            <div class="form-group">
+                                                <div id="location-selector-google-map"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="contactName">Contact Name</label>
+                                                <input type="text" class="form-control" id="contactName" placeholder="Enter contact name" ng-model="report['contact_name']">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contactNum">Contact Number</label>
+                                                <input type="tel" class="form-control" id="contactNum" placeholder="Enter contact number" ng-model="report.contact">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Description (optional)</label>
+                                                <textarea id="description" class="form-control" rows="3" placeholder="Enter details" ng-model="report.description"></textarea>
+                                            </div>
+                                        </div><!-- /.box-body -->
+
+                                        <div class="box-footer">
+                                            <div class="callout callout-danger" ng-show="errorMsg">
+                                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                                <p>{{errorMsg}}</p>
+                                            </div>
+                                            <div class="callout callout-success" ng-show="successMsg">
+                                                <h4><i class="icon fa fa-check"></i> Congratulations!</h4>
+                                                <p>{{successMsg}}</p>
+                                            </div>
+                                            <button class="btn btn-primary" ng-click="submitReport()">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div><!-- /.box -->
+
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <!-- Main row -->
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable-disabled">
+
+
+        </section><!-- right col -->
+    </div><!-- /.row (main row) -->
+
+    <!-- Custom script -->
+    <script src="scripts/controllers/js/create-crisis.js"></script>
+
+</section><!-- /.content -->

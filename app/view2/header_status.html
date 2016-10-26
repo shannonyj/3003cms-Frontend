@@ -1,0 +1,39 @@
+<div class="infobox col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+        <span class="info-box-icon bg-aqua"><img src="images/current-crisis-i.png"> </span>
+        <div class="info-box-content">
+            <span class="info-box-text">Current Crises</span>
+            <span class="info-box-number crisis" ng-show="isActive('/public')">{{approvedIncidents}}</span>
+            <span class="info-box-number crisis" ng-hide="isActive('/public')">{{$root.pushes.incidents.length?$root.pushes.incidents.length:"0"}}</span>
+        </div><!-- /.info-box-content -->
+    </div><!-- /.info-box -->
+</div><!-- /.col -->
+<div class="infobox col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+        <span class="info-box-icon bg-red"><img src="images/weather-i.png"> </span>
+        <div class="info-box-content">
+            <span class="info-box-text">Weather Forecast</span>
+            <span id="api-weather" class="info-box-number weather"></span>
+        </div><!-- /.info-box-content -->
+    </div><!-- /.info-box -->
+</div><!-- /.col -->
+
+<!-- fix for small devices only -->
+<div class="clearfix visible-sm-block"></div>
+
+<div class="infobox col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+        <span class="info-box-icon bg-green"><img src="images/psi-i.png"> </span>
+        <div class="info-box-content">
+            <span class="info-box-text">PSI</span>
+      <span id="api-psi" class="info-box-number psi">
+        <span class="national">National:<div></div></span>
+        <span class="central">Central:<div></div></span>
+        <span class="north">North:<div></div></span>
+        <span class="south">South:<div></div></span>
+        <span class="west">West:<div></div></span>
+        <span class="east">East:<div></div></span>
+      </span>
+        </div><!-- /.info-box-content -->
+    </div><!-- /.info-box -->
+</div>

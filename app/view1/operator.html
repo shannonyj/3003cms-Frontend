@@ -1,0 +1,89 @@
+<section class="wrapper">
+    <div>
+        <header class="main-header">
+            <!-- Logo -->
+            <!-- Logo -->
+            <a class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">CMS</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">Crisis Management System</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+            </nav>
+        </header></div>
+</section>
+
+<section class="content-header">
+    <h1>
+        Crisis Management System
+        <small>Dashboard (Operator)</small>
+    </h1>
+    <!--</ol>-->
+</section>
+
+<section class="content">
+
+    <!-- Info boxes -->
+    <div class="row" ng-include="'view2/header_status.html'">
+
+    </div><!-- /.row -->
+
+    <!--Location Sample-->
+    {{$root.incidents}}<br><br>
+    <div ng-repeat="incident in $root.incidents">{{incident.location}} - {{incident.name}}</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Map -->
+            <div class="box">
+                <div class="box box-success" ng-include="'views/map.html'">
+
+                </div><!-- /.box -->
+            </div><!-- /.box -->
+
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12">
+
+
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <!-- Main row -->
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable-disabled">
+        </section><!-- right col -->
+    </div><!-- /.row (main row) -->
+
+    <ul class="timeline">
+        <!-- timeline time label -->
+        <!--ng-repeat="(date, value) in timeline | groupBy: 'date'"-->
+        <li class="time-label" ng-repeat-start="(date, items) in timeline | orderBy: '-time' | groupBy: 'date'">
+                  <span class="bg-red">
+                    {{date}}
+                  </span>
+        </li>
+        <!-- /.timeline-label -->
+        <!-- timeline item -->
+        <li ng-repeat="item in items" ng-repeat-end>
+
+            <i ng-show="item.timelineType=='incident'" class="fa fa-warning bg-red"></i>
+            <i ng-show="item.timelineType=='dispatch'" class="fa fa-ambulance bg-blue"></i>
+            <i ng-show="item.timelineType=='update'" class="fa fa-heartbeat bg-aqua"></i>
+
+            <div class="timeline-item" ng-include="'view2/timeline/' + item.timelineType + '.html'"></div>
+
+        </li>
+        <!-- END timeline item -->
+        <li>
+            <i class="fa fa-clock-o bg-gray"></i>
+        </li>
+    </ul>
+
+</section><!-- /.content -->
+<script src="scripts/controllers/js/timeline.js"></script>

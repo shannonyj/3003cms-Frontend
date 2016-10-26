@@ -1,0 +1,404 @@
+span.info-box-icon img {
+    height: 90%;
+    width: auto;
+    margin: auto;
+}
+
+span.info-box-icon {
+    padding: 0;
+    line-height: 80px;
+    vertical-align: middle;
+}
+
+span.logo-lg {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.skin-blue .sidebar-menu>li:hover>div, .skin-blue .sidebar-menu>li.active>div {
+    color: #fff;
+    background: #1e282c;
+    border-left-color: #3c8dbc;
+}
+.skin-blue .sidebar-menu>li>div {
+    border-left: 3px solid transparent;
+}
+
+.sidebar-menu>li>div>.fa, .sidebar-menu>li>div>.glyphicon, .sidebar-menu>li>div>.ion {
+    width: 20px;
+}
+
+.sidebar-menu li>div {
+    position: relative;
+}
+.sidebar-menu>li>div {
+    padding: 12px 5px 12px 15px;
+    display: block;
+}
+
+span.select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+    padding: 3px 2px;
+}
+
+.bootstrap-timepicker-widget table td input {
+    padding: 0;
+}
+
+div#location-selector-google-map {
+    width: 100%;
+    height: 325px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear-custom {
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.infobox.col-md-3 {
+    width: 33.3%;
+}
+
+span.info-box-text {
+    font-weight: bold;
+}
+
+span.info-box-number {
+    font-weight: normal;
+}
+
+span.info-box-number.weather {
+    font-size: 14px;
+}
+
+span.info-box-number.crisis {
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+span.info-box-number.psi {
+    font-size: 14px;
+}
+
+span.info-box-number.psi span {
+    width: 50%;
+    float: left;
+    font-weight: lighter;
+}
+
+span.info-box-number.psi span div{
+    display: inline;
+    padding-left: 6px;
+    font-weight: normal;
+}
+
+.login-box, .register-box {
+    margin: auto;
+    padding-top: 10%;
+    padding-bottom: 20%;
+}
+
+.login-logo p {
+    font-size: 24px;
+}
+
+div#map-container {
+    width: 100%;
+}
+
+div#map-label-container {
+    width: 100%;
+}
+
+div#map-label {
+    border-bottom-left-radius: 3px;
+    min-height: 60px;
+    padding: 0;
+}
+
+div#map-label div.map-label{
+    width: 20%;
+    height: 60px;
+    padding: 10px;
+    float: left;
+    background: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+}
+
+div#map-label div.map-label-number{
+    width: 18px;
+    height: 15px;
+    position: absolute;
+    top: 10px;
+    left: 21px;
+    font-size: 11px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+div#map-label div.map-label.active {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+div#map-label div.map-label img{
+    float: left;
+}
+
+div#map-label div.map-label span{
+    float: left;
+    width: 100%;
+}
+
+div#map-label div.map-label#map-label-fire span, div#map-label div.map-label#map-label-accident span,
+div#map-label div.map-label#map-label-riot span, div#map-label div.map-label#map-label-gas span,
+div#map-label div.map-label#map-label-all span {
+    line-height: 2.8;
+}
+
+table#syslog td:first-child{
+    width: 160px;
+}
+
+table#syslog th.empty {
+    display: none;
+}
+
+table#syslog.empty th.empty {
+    display: block;
+}
+
+/* Map details modal */
+div.map-detail-modal span.event-title{
+    font-weight: bold;
+    font-size: 15px;
+    min-width: 130px;
+    display: block;
+    float: left;
+}
+
+div.map-detail-modal span.event-content {
+    font-size: 16px;
+    display: block;
+    float: left;
+}
+
+div.map-detail-modal div.event-detail {
+    min-height: 34px;
+}
+
+div.map-detail-modal.modal-teal {
+    color: white;
+}
+
+div.map-detail-modal.modal-teal div.modal-header, div.map-detail-modal.modal-teal div.modal-footer {
+    background: #30bbbb;
+}
+
+div.map-detail-modal.modal-teal div.modal-header {
+    border-bottom-color: rgb(31, 125, 125);
+}
+
+div.map-detail-modal.modal-teal div.modal-footer {
+    border-top-color: rgb(31, 125, 125);
+}
+
+div.map-detail-modal.modal-teal div.modal-body {
+    background: #39cccc;
+}
+
+div.map-detail-modal .non-clickable {
+    cursor: default;
+}
+
+div.map-detail-modal div.event-dispatch span.event-title{
+    float: none;
+}
+
+div.map-detail-modal div.event-update span.event-title{
+    float: none;
+}
+
+/* To do list modal */
+/* To do list item - incident */
+div.to-do-list-incident span.event-title{
+    font-weight: bold;
+    font-size: 15px;
+    min-width: 130px;
+    display: block;
+    float: left;
+}
+
+div.to-do-list-incident span.event-content {
+    font-size: 16px;
+    display: block;
+    float: left;
+}
+
+div.to-do-list-incident div.event-detail {
+    min-height: 34px;
+}
+
+div.to-do-list-incident .non-clickable {
+    cursor: default;
+}
+
+div.to-do-list-incident #archive-incident-confirm {
+    display: none;
+}
+
+div.to-do-list-incident #archive-incident-cancel {
+    display: none;
+}
+
+div.to-do-list-incident #approve-incident-confirm {
+    display: none;
+}
+
+div.to-do-list-incident #approve-incident-cancel {
+    display: none;
+}
+
+div.to-do-list-incident #reject-incident-confirm {
+    display: none;
+}
+
+div.to-do-list-incident #reject-incident-cancel {
+    display: none;
+}
+
+
+/* To do list item - dispatch */
+div.to-do-list-dispatch span.event-title{
+    font-weight: bold;
+    font-size: 15px;
+    min-width: 130px;
+    display: block;
+    float: left;
+}
+
+div.to-do-list-dispatch span.event-content {
+    font-size: 16px;
+    display: block;
+    float: left;
+}
+
+div.to-do-list-dispatch div.event-detail {
+    min-height: 34px;
+}
+
+div.to-do-list-dispatch .non-clickable {
+    cursor: default;
+}
+
+div.to-do-list-dispatch h3{
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+div.to-do-list-dispatch hr {
+    margin-top: 5px;
+}
+
+
+/* To do list item - update */
+div.to-do-list-update span.event-title{
+    font-weight: bold;
+    font-size: 15px;
+    min-width: 130px;
+    display: block;
+    float: left;
+}
+
+div.to-do-list-update span.event-content {
+    font-size: 16px;
+    display: block;
+    float: left;
+}
+
+div.to-do-list-update div.event-detail {
+    min-height: 34px;
+}
+
+div.to-do-list-update .non-clickable {
+    cursor: default;
+}
+
+div.to-do-list-update h3{
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+div.to-do-list-update hr {
+    margin-top: 5px;
+}
+
+div.to-do-list-update div.event-photo img {
+    max-width: 400px;
+    height: auto;
+}
+
+/* Timeline items */
+div.timeline-item h3.timeline-header {
+    font-weight: bold;
+}
+
+div.timeline-item p.timeline-item-detail{
+    clear: both;
+    font-weight: bold;
+}
+
+div.timeline-item div.timeline-item-photo{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+div.timeline-item div.timeline-item-photo img {
+    max-width: 500px;
+    height: auto;
+}
+
+div.timeline-item p.timeline-item-updated-severity-title {
+    float: left;
+    line-height: 1.8;
+}
+
+div.timeline-item div.timeline-item-updated-severity {
+    float: left;
+    margin-left: 15px;
+}
+
+div.timeline-item p.timeline-item-severity-title {
+    float: left;
+    line-height: 1.8;
+}
+
+div.timeline-item div.timeline-item-severity {
+    float: left;
+    margin-left: 15px;
+}
+
+div.timeline-item p.timeline-item-type-title {
+    float: left;
+}
+
+div.timeline-item p.timeline-item-type {
+    float: left;
+    margin-left: 15px;
+}
+
+div.timeline-item p.timeline-item-location-title {
+    float: left;
+}
+
+div.timeline-item p.timeline-item-location {
+    float: left;
+    margin-left: 15px;
+}
+.non-clickable {
+    cursor: default;
+}

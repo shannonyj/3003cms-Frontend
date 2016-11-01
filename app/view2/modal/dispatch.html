@@ -1,0 +1,74 @@
+<div class="modal-dialog modal-primary to-do-list-dispatch" ng-init="init()">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{{'&lt;' + incident.name + "&gt;: Dispatch Requires Approval"}}</h4>
+        </div>
+        <div class="modal-body">
+            <h3>Crisis Event</h3>
+            <hr>
+            <div class="event-detail event-type">
+                <span class="event-title">Event Type:</span>
+                <span class="event-content">{{incident.type[0].toUpperCase() + incident.type.substring(1)}}</span>
+            </div>
+            <div class="event-detail event-time">
+                <span class="event-title">Time:</span>
+                <span class="event-content">{{incident.formattedTime}}</span>
+            </div>
+            <div class="event-detail event-location">
+                <span class="event-title">Location:</span>
+                <span class="event-content">{{incident.location}}</span>
+            </div>
+            <div class="event-detail event-severity">
+                <span class="event-title">Severity:</span>
+                <span class="event-content">
+                  <div class="severity-value" style="display: none;">{{incident.severity}}</div>
+                  <div id="event-severity-check">
+                      <input type="radio" name="sev1" class="flat-yellow" ng-checked="incident.severity >= 1" disabled>
+                      <input type="radio" name="sev2" class="flat-yellow" ng-checked="incident.severity >= 2" disabled>
+                      <input type="radio" name="sev3" class="flat-yellow" ng-checked="incident.severity >= 3" disabled>
+                      <input type="radio" name="sev4" class="flat-yellow" ng-checked="incident.severity >= 4" disabled>
+                      <input type="radio" name="sev5" class="flat-yellow" ng-checked="incident.severity >= 5" disabled>
+                  </div>
+                </span>
+            </div>
+            <div class="event-detail event-description" ng-hide="!incident.description">
+                <span class="event-title">Description: </span>
+                <span class="event-content">{{incident.description}}</span>
+            </div>
+
+            <h3>Proposed Dispatch</h3>
+            <hr>
+            <div class="event-detail event-agency">
+                <span class="event-title">Agency:</span>
+                <span class="event-content">{{dispatch.agency.name}}</span>
+            </div>
+            <div class="event-detail event-resource">
+                <span class="event-title">Resources:</span>
+                <span class="event-content">{{dispatch.resource}}</span>
+            </div>
+            <div class="event-detail event-time">
+                <span class="event-title">Time:</span>
+                <span class="event-content">{{dispatch.formattedTime}}</span>
+            </div>
+            <div class="event-detail event-contact">
+                <span class="event-title">Contact:</span>
+                <span class="event-content">{{dispatch.agency.contact}}</span>
+            </div>
+            <div class="event-detail event-email">
+                <span class="event-title">Email:</span>
+                <span class="event-content">{{dispatch.agency.email}}</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal" ng-click="cancel()">Close</button>
+
+            <button type="button" id="approve-dispatch-confirm" class="btn btn-outline" ng-click="dispatchApprove()">Confirm</button>
+            <button type="button" id="approve-dispatch-cancel" class="btn btn-outline">Cancel</button>
+            <button type="button" id="approve-dispatch" class="btn btn-outline"><span>Approve</span></button>
+            <button type="button" id="reject-dispatch-confirm" class="btn btn-outline" ng-click="dispatchReject()">Confirm</button>
+            <button type="button" id="reject-dispatch-cancel" class="btn btn-outline">Cancel</button>
+            <button type="button" id="reject-dispatch" class="btn btn-outline"><span>Reject</span></button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

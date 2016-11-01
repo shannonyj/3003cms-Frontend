@@ -96,10 +96,10 @@
 <body class="hold-transition skin-blue sidebar-mini" ng-app="myApp">
 
   <!-- Left side column. contains the logo and sidebar -->
-  <div>
+  <div class="wrapper">
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <section class="sidebar" style="height:auto;">
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
@@ -125,7 +125,7 @@
             <li ng-class="{ active: isActive('/kdm') }" ng-show="$root.userData.concreteuser.type=='kdm'"><a href="#/kdm"><i class="fa fa-circle-o text-yellow"></i> KDM Dashboard</a></li>
             <li ng-class="{ active: isActive('/public') }"><a href="#/public"><i class="fa fa-circle-o text-aqua"></i> Public Dashboard</a></li>
             -->
-            <li ng-class="{ active: isActive('/') }" ><a href="#/"><i class="fa fa-circle-o text-red"></i> Manager Dashboard</a></li>
+            <li ng-class="{ active: isActive('/') }" ><a href="#/operator"><i class="fa fa-circle-o text-red"></i> Operator Dashboard</a></li>
             <li ng-class="{ active: isActive('/kdm') }" ><a href="#/kdm"><i class="fa fa-circle-o text-yellow"></i> KDM Dashboard</a></li>
             <li ng-class="{ active: isActive('/public') }"><a href="#/public"><i class="fa fa-circle-o text-aqua"></i> Public Dashboard</a></li>
           </ul>
@@ -153,7 +153,7 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-  </div>
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" ng-view="" ng-init="$root.init()">
@@ -168,7 +168,7 @@
   </footer>
 
 
-
+  </div>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
@@ -176,7 +176,6 @@
 </script>
 
 <!-- Morris.js charts -->
-<script src="bower_components/raphael/raphael-min.js"></script>
 <script src="bower_components/admin-lte/plugins/morris/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="bower_components/admin-lte/plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -212,6 +211,7 @@
 <script src = "view2/view2.js"></script>
 <!--Controllers-->
   <script src="scripts/controllers/public.js"></script>
+  <script src ="scripts/controllers/kdm.js"></script>
   <script src="scripts/controllers/main.js"></script>
 <!--
 <script src="scripts/controllers/login.js"></script>

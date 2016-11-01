@@ -38,31 +38,6 @@
                 </div><!-- /.box -->
             <!--</div><!-- /.box -->
 
-            <!-- The time line -->
-            <ul class="timeline">
-                <!-- timeline time label -->
-                <!--ng-repeat="(date, value) in timeline | groupBy: 'date'"-->
-                <li class="time-label" ng-repeat-start="(date, items) in timeline | orderBy: '-time' | groupBy: 'date'">
-                  <span class="bg-red">
-                    {{date}}
-                  </span>
-                </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li ng-repeat="item in items" ng-repeat-end>
-
-                    <i ng-show="item.timelineType=='incident'" class="fa fa-warning bg-red"></i>
-                    <i ng-show="item.timelineType=='dispatch'" class="fa fa-ambulance bg-blue"></i>
-                    <i ng-show="item.timelineType=='update'" class="fa fa-heartbeat bg-aqua"></i>
-
-                    <div class="timeline-item" ng-include="'views/timeline/' + item.timelineType + '.html'"></div>
-
-                </li>
-                <!-- END timeline item -->
-                <li>
-                    <i class="fa fa-clock-o bg-gray"></i>
-                </li>
-            </ul>
         </div><!-- /.col -->
     </div><!-- /.row -->
 

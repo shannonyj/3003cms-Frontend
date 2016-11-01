@@ -8,7 +8,9 @@
     * # MainCtrl
     * Controller of the tbcCmsFrontApp
    */
-  angular.module('myApp').controller('MainCtrl', function($scope, $rootScope, $location, $routeParams, $uibModal, djangoWebsocket, Incident, Agency, User, localStorageService) {
+  angular.module('myApp').controller('MainCtrl', function($scope, $rootScope, $location, $routeParams,
+                                                          $uibModal, djangoWebsocket, Incident, Agency, User, localStorageService
+  ) {
     djangoWebsocket.connect($rootScope, 'pushes', 'pushes', ['subscribe-broadcast']);
     $rootScope.doLogout = function() {
       User.logout($rootScope.userData.token, function() {
@@ -110,7 +112,15 @@
     $rootScope.systemLogs = [];
     $rootScope.$watchCollection('pushes', function() {
       if ($rootScope.initialized) {
-        $scope.todoList = $scope.compileTodoList();
+        //$scope.todoList = $scope.compileTodoList();
+
+
+        //tbc
+        $scope.todoList = [{"id":243,"inciupdate_set":[98,99],"dispatch_set":[149],"name":"Fire in NTU Chemistry Lab",
+          "status":"approved","severity":2,"time":"2015-11-11T12:54:00Z","location":"Nanyang Technological University Singapore","longitude":"103.681697035968","latitude":"1.3435905146060658",
+          "contact_name":"Unknown","contact":"+6584393467","type":"fire","description":"The fire is very fierce!","todoType":"incident"},
+          {"id":244,"inciupdate_set":[100],"dispatch_set":[150],"name":"zhou","status":"approved","severity":5,"time":"2015-11-11T13:45:00Z","location":"Dhoby Ghaut Singapore",
+            "longitude":"103.84603889999994","latitude":"1.298745","contact_name":"Unknown","contact":"da","type":"accident","description":"dd","todoType":"incident"}];
         resetMarkers($rootScope);
         console.log("change");
       }
@@ -120,6 +130,7 @@
         return;
       }
     });
+
     $rootScope.openMapModal = function(id) {
       var incident;
       incident = Incident.getIncident($rootScope.userData.token, id, function(incident) {
@@ -141,6 +152,7 @@
         });
       });
     };
+
     $scope.open = function(type, inci_id, id, todo) {
       var modalInstance;
       modalInstance = $uibModal.open({
@@ -168,6 +180,8 @@
         console.log('Modal dismissed at: ' + new Date);
       });
     };
+
+
     $scope.toggleAnimation = function() {
       $scope.animationsEnabled = !$scope.animationsEnabled;
     };

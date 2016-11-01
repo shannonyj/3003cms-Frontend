@@ -1,0 +1,94 @@
+<div class="modal-dialog modal-info to-do-list-update" ng-init="init()">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{{"&lt;" + incident.name + "&gt;: Crisis Update Requires Approval"}}</h4>
+        </div>
+        <div class="modal-body">
+            <h3>Crisis Event</h3>
+            <hr>
+            <div class="event-detail event-type">
+                <span class="event-title">Event Type:</span>
+                <span class="event-content">{{incident.type[0].toUpperCase() + incident.type.substring(1)}}</span>
+            </div>
+            <div class="event-detail event-time">
+                <span class="event-title">Time:</span>
+                <span class="event-content">{{incident.formattedTime}}</span>
+            </div>
+            <div class="event-detail event-location">
+                <span class="event-title">Location:</span>
+                <span class="event-content">{{incident.location}}</span>
+            </div>
+            <div class="event-detail event-severity">
+                <span class="event-title">Severity: {{incident.severity}}</span>
+                <span class="event-content">
+                  <div class="severity-value" style="display: none;">{{incident.severity}}</div>
+                  <div id="event-severity-check">
+                      <input type="radio" name="sev1" class="flat-yellow" ng-checked="incident.severity >= 1" disabled>
+                      <input type="radio" name="sev2" class="flat-yellow" ng-checked="incident.severity >= 2" disabled>
+                      <input type="radio" name="sev3" class="flat-yellow" ng-checked="incident.severity >= 3" disabled>
+                      <input type="radio" name="sev4" class="flat-yellow" ng-checked="incident.severity >= 4" disabled>
+                      <input type="radio" name="sev5" class="flat-yellow" ng-checked="incident.severity >= 5" disabled>
+                  </div>
+                </span>
+            </div>
+            <div class="event-detail event-description" ng-hide="!incident.description">
+                <span class="event-title">Description: </span>
+                <span class="event-content">{{incident.description}}</span>
+            </div>
+
+            <h3>Updated Information</h3>
+            <hr>
+            <div class="event-detail event-time">
+                <span class="event-title">Time:</span>
+                <span class="event-content">{{update.formattedTime}}</span>
+            </div>
+            <div class="event-detail event-severity">
+                <span class="event-title">Severity:</span>
+                <span class="event-content">
+                  <div class="severity-value" style="display: none;">{{update['updated_severity']}}</div>
+                  <div id="event-updated-severity-check">
+                      <input type="radio" name="usev1" class="flat-yellow" ng-checked="update['updated_severity'] >= 1" disabled>
+                      <input type="radio" name="usev2" class="flat-yellow" ng-checked="update['updated_severity'] >= 2" disabled>
+                      <input type="radio" name="usev3" class="flat-yellow" ng-checked="update['updated_severity'] >= 3" disabled>
+                      <input type="radio" name="usev4" class="flat-yellow" ng-checked="update['updated_severity'] >= 4" disabled>
+                      <input type="radio" name="usev5" class="flat-yellow" ng-checked="update['updated_severity'] >= 5" disabled>
+                  </div>
+                </span>
+            </div>
+            <div class="event-detail event-description">
+                <span class="event-title">Description: </span>
+                <span class="event-content">{{update.description}}</span>
+            </div>
+            <div class="event-detail event-photo" ng-show="update['photo_url'] && update['photo_url'].length > 0">
+                <span class="event-title">Photo: </span>
+                <img src="{{update['photo_url']}}">
+            </div>
+
+            <h3>Agency Information</h3>
+            <hr>
+            <div class="event-detail event-agency">
+                <span class="event-title">Name:</span>
+                <span class="event-content">{{update.agency.name}}</span>
+            </div>
+            <div class="event-detail event-contact">
+                <span class="event-title">Contact:</span>
+                <span class="event-content">{{update.agency.contact}}</span>
+            </div>
+            <div class="event-detail event-email">
+                <span class="event-title">Email:</span>
+                <span class="event-content">{{update.agency.email}}</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal" ng-click="cancel()">Close</button>
+
+            <button type="button" id="approve-update-confirm" class="btn btn-outline" ng-click="updateApprove()">Confirm</button>
+            <button type="button" id="approve-update-cancel" class="btn btn-outline">Cancel</button>
+            <button type="button" id="approve-update" class="btn btn-outline"><span>Approve</span></button>
+            <button type="button" id="reject-update-confirm" class="btn btn-outline" ng-click="updateReject()">Confirm</button>
+            <button type="button" id="reject-update-cancel" class="btn btn-outline">Cancel</button>
+            <button type="button" id="reject-update" class="btn btn-outline"><span>Reject</span></button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

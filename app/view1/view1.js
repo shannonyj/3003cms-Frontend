@@ -11,6 +11,11 @@ angular.module('myApp.view1', ['ngRoute'])
       .when('/operator', {
           templateUrl:'view1/operator.html',
           controller: 'PublicCtrl'
+      })
+
+      .when('/kdm',{
+          templateUrl:'view1/decision.html',
+          controller:'PublicCtrl'
       });
 }])
 

@@ -1,3 +1,18 @@
+<div class="wrapper">
+    <div>
+        <header class="main-header">
+            <!-- Logo -->
+            <a class="logo" style="">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">CMS</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">Crisis Management System</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+            </nav>
+        </header></div>
+</div>
 <!-- Content Header (Page header) -->
 <section class="content-header" >
     <h1>
@@ -10,30 +25,28 @@
 <section class="content">
 
     <!-- Info boxes -->
-    <div class="row" ng-include="'views/header_status.html'">
-
+    <div class="row" ng-include="'view2/header_status.html'">
     </div><!-- /.row -->
+
     <!-- Main row -->
     <div class="row">
         <!-- Left col -->
         <section class="col-lg-7 connectedSortable-disabled">
 
-            <!-- MAP & BOX PANE -->
-            <div class="box box-success" ng-include="'views/map.html'">
+            <!-- Insert Map here! -->
 
-            </div><!-- /.box -->
-
-
-            <!-- TABLE: LATEST ORDERS -->
-            <div class="box box-info" ng-include="'views/syslog.html'">
-
+            <!-- System Log -->
+            <!--
+            <div class="box box-info" ng-include="'view2/syslog.html'">
             </div><!-- /.box -->
 
         </section><!-- /.Left col -->
-        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-        <section class="col-lg-5 connectedSortable-disabled">
 
+
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable-disabled" ng-controller="kdmCtrl">
             <!-- TO DO List -->
+
             <div class="box box-primary">
                 <div class="box-header">
                     <i class="ion ion-clipboard"></i>
@@ -54,24 +67,27 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <ul class="todo-list">
-                        <li ng-repeat="todo in todoList | orderBy:'-time' | startFrom:currentPage*pageSize | limitTo:pageSize">
+                        <li ng-repeat="todo in todoList | orderBy:'-time'">
                             <!-- drag handle -->
                       <span class="handle-disabled">
                         <i class="fa fa-ellipsis-v"></i>
                         <i class="fa fa-ellipsis-v"></i>
                       </span>
                             <!-- todo text -->
-                            <span ng-include="'views/to-do-list-item/' + todo.todoType + '.html'"></span>
+                            <span ng-include="'view2/to-do-list-item/' + todo.todoType + '.html'"></span>
                         </li>
 
                     </ul>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
 
-
         </section><!-- right col -->
+
+
+
+
     </div><!-- /.row (main row) -->
 
 </section><!-- /.content -->
 
-<script src="scripts/controllers/js/incident-modal.js"></script>
+<script src="scripts/controllers/js/timeline.js"></script>

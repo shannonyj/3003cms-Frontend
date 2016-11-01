@@ -1,0 +1,23 @@
+<div class="box-header with-border">
+    <i class="fa fa-file-text"></i>
+    <h3 class="box-title">System Log
+    </h3>
+</div><!-- /.box-header -->
+<div class="box-body">
+    <div class="table-responsive">
+        <table id="syslog" class="table no-margin">
+            <thead ng-hide="$root.systemLogs && $root.systemLogs.length!=0">
+            <tr>
+                <th colspan="2">Currently there is no system log</th>
+            </tr>
+            </thead>
+            <tbody ng-show="$root.systemLogs && $root.systemLogs.length!=0">
+            <tr ng-repeat="log in $root.systemLogs | orderBy:'-time'">
+                <td>{{log.formattedTime}}</td>
+                <td>{{log.name}}</td>
+                <!--<td>{{log}}</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div><!-- /.box-body -->

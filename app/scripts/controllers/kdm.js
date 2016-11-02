@@ -70,7 +70,7 @@
             }];
         $scope.init = function(){
             var token;
-            
+
         }
 
 

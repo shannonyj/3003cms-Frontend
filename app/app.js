@@ -6,7 +6,8 @@ var myApp = angular.module('myApp', [
   'myApp.view2',
   'angular.filter',
   //'myApp.version',
-  'ngMessages'
+  'ngMessages',
+  'ui.bootstrap'
 ]);
 
 myApp.config(function($routeProvider) {

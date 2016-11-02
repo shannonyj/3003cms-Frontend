@@ -9,9 +9,11 @@
     * Controller of the tbcCmsFrontApp
    */
   angular.module('myApp').controller('MainCtrl', function($scope, $rootScope, $location, $routeParams,
-                                                          $uibModal, djangoWebsocket, Incident, Agency, User, localStorageService
+                                                          $uibModal,
+                                                          //djangoWebsocket,
+                                                          Incident, Agency, User, localStorageService
   ) {
-    djangoWebsocket.connect($rootScope, 'pushes', 'pushes', ['subscribe-broadcast']);
+    //djangoWebsocket.connect($rootScope, 'pushes', 'pushes', ['subscribe-broadcast']);
     $rootScope.doLogout = function() {
       User.logout($rootScope.userData.token, function() {
         localStorageService.remove("token");
@@ -131,6 +133,7 @@
       }
     });
 
+    /*
     $rootScope.openMapModal = function(id) {
       var incident;
       incident = Incident.getIncident($rootScope.userData.token, id, function(incident) {
@@ -152,6 +155,7 @@
         });
       });
     };
+    */
 
     $scope.open = function(type, inci_id, id, todo) {
       var modalInstance;

@@ -1,0 +1,193 @@
+    <script>
+        var mapManager;
+        $(document).ready(function () {
+            $('#markAreaBtn').click(function () {
+                mapManager.triggerMarkAreaClick();
+            });
+            $('.disasterType').change(function () {
+                mapManager.setDisasterType($(this).val());
+            });
+            $('.areaList li').click(function () {
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+                mapManager.setDisasterType($(this).attr('disasterType'));
+            });
+            $('.modifyAreaForm .closeIcon').click(function () {
+                $('.modifyAreaForm').hide();
+            });
+            $('#saveMapBtn').click(function () {
+                mapManager.saveMap();
+            });
+            $('#toggleEditBtn').click(function () {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active').text('Edit mode: Off');
+                    mapManager.setEditable(false);
+                }
+                else {
+                    $(this).addClass('active').text('Edit mode: On');
+                    mapManager.setEditable(true);
+                    $('.areaList li').removeClass('active');
+                    $('.modifyAreaForm').hide();
+                    dehighlightAllAreas();
+                }
+            });
+            $('#clearMapBtn').click(function () {
+                $('.areaList').empty();
+                mapManager.clearMap();
+                $('.modifyAreaForm').hide();
+            });
+            $('.loadList li:eq(0)').data('map', JSON.stringify([{ "coordinates": [{ "lat": 1.397562659547266, "lng": 103.70304107666016 }, { "lat": 1.40374062266067, "lng": 103.7270736694336 }, { "lat": 1.3447060959795738, "lng": 103.7160873413086}], "disaster": "Zombie", "type": "Polygon", "name": "Area1", "time": "2016-10-25T17:41:11.176Z" }, { "coordinates": [{ "lat": 1.4215879797063258, "lng": 103.73531341552734 }, { "lat": 1.4229608476328477, "lng": 103.7710189819336 }, { "lat": 1.3117559678296862, "lng": 103.7710189819336 }, { "lat": 1.318620614005517, "lng": 103.74149322509766}], "disaster": "Terminator", "type": "Polygon", "name": "Area2", "time": "2016-10-25T17:41:15.876Z" }, { "coordinates": [{ "lat": 1.3804015658498483, "lng": 103.80741119384766 }, { "lat": 1.3762828848738569, "lng": 103.9200210571289 }, { "lat": 1.3694184007839654, "lng": 103.86165618896484}], "disaster": "Fire", "type": "Polygon", "name": "Area3", "time": "2016-10-25T17:41:23.126Z" }, { "coordinates": [{ "lat": 1.4174693710318358, "lng": 103.87813568115234}], "disaster": "Safehouse", "type": "Point", "name": "Point4", "time": "2016-10-25T17:41:25.872Z" }, { "coordinates": [{ "lat": 1.3042048352878455, "lng": 103.87676239013672}], "disaster": "Safehouse", "type": "Point", "name": "Point6", "time": "2016-10-25T17:41:26.956Z" }, { "coordinates": [{ "lat": 1.3213664671805336, "lng": 103.6831283569336}], "disaster": "Safehouse", "type": "Point", "name": "Point7", "time": "2016-10-25T17:41:27.804Z"}]));
+            $('.loadList li:eq(1)').data('map', JSON.stringify([{ "coordinates": [{ "lat": 1.387266018278387, "lng": 103.6996078491211 }, { "lat": 1.3913846801819658, "lng": 103.8486099243164 }, { "lat": 1.3350956873992508, "lng": 103.8369369506836 }, { "lat": 1.3007724948165194, "lng": 103.6941146850586}], "disaster": "Thunderstorm", "type": "Polygon", "name": "Area1", "time": "2016-10-25T18:03:46.566Z" }, { "coordinates": [{ "lat": 1.3961897766458278, "lng": 103.8973617553711 }, { "lat": 1.3783422262523317, "lng": 103.87813568115234 }, { "lat": 1.3563758269303845, "lng": 103.88980865478516 }, { "lat": 1.3563758269303845, "lng": 103.9193344116211 }, { "lat": 1.3790286729828543, "lng": 103.9303207397461}], "disaster": "Fire", "type": "Polygon", "name": "Area2", "time": "2016-10-25T18:03:56.149Z" }, { "coordinates": [{ "lat": 1.3742235417170832, "lng": 103.8534164428711}], "disaster": "Safehouse", "type": "Point", "name": "Point3", "time": "2016-10-25T18:03:58.668Z" }, { "coordinates": [{ "lat": 1.3646132502172907, "lng": 103.85616302490234}], "disaster": "Safehouse", "type": "Point", "name": "Point4", "time": "2016-10-25T18:03:59.068Z" }, { "coordinates": [{ "lat": 1.397562659547266, "lng": 103.87950897216797}], "disaster": "Safehouse", "type": "Point", "name": "Point5", "time": "2016-10-25T18:04:00.385Z" }, { "coordinates": [{ "lat": 1.3906982370301906, "lng": 103.87401580810547}], "disaster": "Safehouse", "type": "Point", "name": "Point6", "time": "2016-10-25T18:04:01.320Z" }, { "coordinates": [{ "lat": 1.3810880119861417, "lng": 103.8753890991211}], "disaster": "Safehouse", "type": "Point", "name": "Point7", "time": "2016-10-25T18:04:02.026Z" }, { "coordinates": [{ "lat": 1.3598080900508371, "lng": 103.87332916259766}], "disaster": "Safehouse", "type": "Point", "name": "Point8", "time": "2016-10-25T18:04:02.740Z" }, { "coordinates": [{ "lat": 1.3536300129282497, "lng": 103.85684967041016}], "disaster": "Safehouse", "type": "Point", "name": "Point9", "time": "2016-10-25T18:04:03.305Z" }, { "coordinates": [{ "lat": 1.3268581644182016, "lng": 103.8589096069336}], "disaster": "Safehouse", "type": "Point", "name": "Point10", "time": "2016-10-25T18:04:04.826Z" }, { "coordinates": [{ "lat": 1.3426467258886163, "lng": 103.8753890991211}], "disaster": "Safehouse", "type": "Point", "name": "Point11", "time": "2016-10-25T18:04:05.266Z" }, { "coordinates": [{ "lat": 1.3110695021746468, "lng": 103.86165618896484}], "disaster": "Safehouse", "type": "Point", "name": "Point12", "time": "2016-10-25T18:04:05.719Z" }, { "coordinates": [{ "lat": 1.3247987793801, "lng": 103.88225555419922}], "disaster": "Safehouse", "type": "Point", "name": "Point13", "time": "2016-10-25T18:04:06.136Z" }, { "coordinates": [{ "lat": 1.2959672103157076, "lng": 103.86234283447266}], "disaster": "Safehouse", "type": "Point", "name": "Point14", "time": "2016-10-25T18:04:06.581Z" }, { "coordinates": [{ "lat": 1.3055777701663411, "lng": 103.88362884521484}], "disaster": "Safehouse", "type": "Point", "name": "Point15", "time": "2016-10-25T18:04:06.974Z" }, { "coordinates": [{ "lat": 1.2877295585501318, "lng": 103.8698959350586}], "disaster": "Safehouse", "type": "Point", "name": "Point16", "time": "2016-10-25T18:04:07.438Z" }, { "coordinates": [{ "lat": 1.2973401496763173, "lng": 103.8863754272461}], "disaster": "Safehouse", "type": "Point", "name": "Point17", "time": "2016-10-25T18:04:08.270Z" }, { "coordinates": [{ "lat": 1.285670141442205, "lng": 103.87676239013672}], "disaster": "Safehouse", "type": "Point", "name": "Point18", "time": "2016-10-25T18:04:08.802Z" }, { "coordinates": [{ "lat": 1.2774324564241843, "lng": 103.6831283569336 }, { "lat": 1.233497694436404, "lng": 103.80672454833984 }, { "lat": 1.301458963284683, "lng": 103.99417877197266 }, { "lat": 1.2884160305498051, "lng": 104.0017318725586 }, { "lat": 1.242422002512647, "lng": 103.9468002319336 }, { "lat": 1.2149624976602746, "lng": 103.8156509399414 }, { "lat": 1.225946333447254, "lng": 103.71334075927734 }, { "lat": 1.2726271279562498, "lng": 103.6611557006836}], "disaster": "Terminator", "type": "Polygon", "name": "Area19", "time": "2016-10-25T18:04:22.710Z" }, { "coordinates": [{ "lat": 1.2726271279562498, "lng": 103.93306732177734 }, { "lat": 1.2520327621050023, "lng": 103.9255142211914 }, { "lat": 1.2492868343763082, "lng": 103.9419937133789 }, { "lat": 1.2774324564241843, "lng": 103.96053314208984}], "disaster": "Fire", "type": "Polygon", "name": "Area20", "time": "2016-10-25T18:04:35.119Z" }, { "coordinates": [{ "lat": 1.2492868343763082, "lng": 103.8644027709961 }, { "lat": 1.2369301241734323, "lng": 103.82320404052734 }, { "lat": 1.2341841807384084, "lng": 103.85753631591797}], "disaster": "Fire", "type": "Polygon", "name": "Area21", "time": "2016-10-25T18:04:39.082Z" }, { "coordinates": [{ "lat": 1.247333525405573, "lng": 103.69012052095854 }, { "lat": 1.269881221952627, "lng": 103.73531341552734 }, { "lat": 1.2149624976602746, "lng": 103.7222671508789 }, { "lat": 1.2396760647669485, "lng": 103.66802215576172}], "disaster": "Fire", "type": "Polygon", "name": "Area22", "time": "2016-10-25T18:04:43.301Z"}]));
+            $('.loadList li:eq(2)').data('map', JSON.stringify([{ "coordinates": [{ "lat": 1.4215879797063258, "lng": 103.7051010131836 }, { "lat": 1.3831473492049342, "lng": 103.66390228271484 }, { "lat": 1.3254852412497957, "lng": 103.71402740478516 }, { "lat": 1.3035183675676847, "lng": 103.7820053100586 }, { "lat": 1.3117559678296862, "lng": 103.8486099243164 }, { "lat": 1.3584351853876364, "lng": 103.86234283447266 }, { "lat": 1.405113501138262, "lng": 103.80123138427734}], "disaster": "Thunderstorm", "type": "Polygon", "name": "Area1", "time": "2016-10-25T18:05:32.646Z" }, { "coordinates": [{ "lat": 1.4003084229416616, "lng": 103.8698959350586 }, { "lat": 1.3598080900508371, "lng": 103.80123138427734 }, { "lat": 1.2966536800890944, "lng": 103.8486099243164 }, { "lat": 1.3131288985746439, "lng": 103.94954681396484 }, { "lat": 1.3529435589416223, "lng": 103.9632797241211}], "disaster": "Terminator", "type": "Polygon", "name": "Area2", "time": "2016-10-25T18:05:40.615Z" }, { "coordinates": [{ "lat": 1.3268581644182016, "lng": 103.75179290771484 }, { "lat": 1.3481383756020417, "lng": 103.8259506225586 }, { "lat": 1.2794918801613286, "lng": 103.84654998779297 }, { "lat": 1.2472273866960881, "lng": 103.7874984741211 }, { "lat": 1.2685082678564947, "lng": 103.73668670654297}], "disaster": "Fire", "type": "Polygon", "name": "Area3", "time": "2016-10-25T18:05:46.555Z" }, { "coordinates": [{ "lat": 1.4421809124464007, "lng": 103.78543853759766 }, { "lat": 1.3838337945475139, "lng": 103.77376556396484 }, { "lat": 1.3584351853876364, "lng": 103.8259506225586 }, { "lat": 1.4092321317265322, "lng": 103.9035415649414 }, { "lat": 1.4497316079039875, "lng": 103.82389068603516}], "disaster": "Zombie", "type": "Polygon", "name": "Area4", "time": "2016-10-25T18:05:55.655Z" }, { "coordinates": [{ "lat": 1.3433331827784922, "lng": 103.65291595458984}], "disaster": "Safehouse", "type": "Point", "name": "Point5", "time": "2016-10-25T18:05:58.629Z" }, { "coordinates": [{ "lat": 1.3309769293483178, "lng": 103.66252899169922}], "disaster": "Safehouse", "type": "Point", "name": "Point6", "time": "2016-10-25T18:05:58.981Z" }, { "coordinates": [{ "lat": 1.3378415222676052, "lng": 103.68106842041016}], "disaster": "Safehouse", "type": "Point", "name": "Point7", "time": "2016-10-25T18:05:59.475Z" }, { "coordinates": [{ "lat": 1.3172476862817302, "lng": 103.6831283569336}], "disaster": "Safehouse", "type": "Point", "name": "Point8", "time": "2016-10-25T18:05:59.947Z"}]));
+            $('.loadList li:eq(3)').data('map', JSON.stringify([{ "coordinates": [{ "lat": 1.397562659547266, "lng": 103.70304107666016 }, { "lat": 1.40374062266067, "lng": 103.7270736694336 }, { "lat": 1.3447060959795738, "lng": 103.7160873413086}], "disaster": "Zombie", "type": "Polygon", "name": "Area1", "time": "2016-10-25T17:41:11.176Z" }, { "coordinates": [{ "lat": 1.4215879797063258, "lng": 103.73531341552734 }, { "lat": 1.4229608476328477, "lng": 103.7710189819336 }, { "lat": 1.3117559678296862, "lng": 103.7710189819336 }, { "lat": 1.318620614005517, "lng": 103.74149322509766}], "disaster": "Terminator", "type": "Polygon", "name": "Area2", "time": "2016-10-25T17:41:15.876Z" }, { "coordinates": [{ "lat": 1.3804015658498483, "lng": 103.80741119384766 }, { "lat": 1.3762828848738569, "lng": 103.9200210571289 }, { "lat": 1.3694184007839654, "lng": 103.86165618896484}], "disaster": "Fire", "type": "Polygon", "name": "Area3", "time": "2016-10-25T17:41:23.126Z" }, { "coordinates": [{ "lat": 1.4174693710318358, "lng": 103.87813568115234}], "disaster": "Safehouse", "type": "Point", "name": "Point4", "time": "2016-10-25T17:41:25.872Z" }, { "coordinates": [{ "lat": 1.3694184007839654, "lng": 103.7929916381836}], "disaster": "Safehouse", "type": "Point", "name": "Point5", "time": "2016-10-25T17:41:26.431Z" }, { "coordinates": [{ "lat": 1.3042048352878455, "lng": 103.87676239013672}], "disaster": "Safehouse", "type": "Point", "name": "Point6", "time": "2016-10-25T17:41:26.956Z" }, { "coordinates": [{ "lat": 1.3213664671805336, "lng": 103.6831283569336}], "disaster": "Safehouse", "type": "Point", "name": "Point7", "time": "2016-10-25T17:41:27.804Z"}]));
+            $('.loadList li:eq(4)').data('map', JSON.stringify([{ "coordinates": [{ "lat": 1.387266018278387, "lng": 103.6996078491211 }, { "lat": 1.3913846801819658, "lng": 103.8486099243164 }, { "lat": 1.3350956873992508, "lng": 103.8369369506836 }, { "lat": 1.3007724948165194, "lng": 103.6941146850586}], "disaster": "Thunderstorm", "type": "Polygon", "name": "Area1", "time": "2016-10-25T18:03:46.566Z" }, { "coordinates": [{ "lat": 1.3961897766458278, "lng": 103.8973617553711 }, { "lat": 1.3783422262523317, "lng": 103.87813568115234 }, { "lat": 1.3563758269303845, "lng": 103.88980865478516 }, { "lat": 1.3563758269303845, "lng": 103.9193344116211 }, { "lat": 1.3790286729828543, "lng": 103.9303207397461}], "disaster": "Fire", "type": "Polygon", "name": "Area2", "time": "2016-10-25T18:03:56.149Z" }, { "coordinates": [{ "lat": 1.3742235417170832, "lng": 103.8534164428711}], "disaster": "Safehouse", "type": "Point", "name": "Point3", "time": "2016-10-25T18:03:58.668Z" }, { "coordinates": [{ "lat": 1.3646132502172907, "lng": 103.85616302490234}], "disaster": "Safehouse", "type": "Point", "name": "Point4", "time": "2016-10-25T18:03:59.068Z" }, { "coordinates": [{ "lat": 1.397562659547266, "lng": 103.87950897216797}], "disaster": "Safehouse", "type": "Point", "name": "Point5", "time": "2016-10-25T18:04:00.385Z" }, { "coordinates": [{ "lat": 1.3906982370301906, "lng": 103.87401580810547}], "disaster": "Safehouse", "type": "Point", "name": "Point6", "time": "2016-10-25T18:04:01.320Z" }, { "coordinates": [{ "lat": 1.3810880119861417, "lng": 103.8753890991211}], "disaster": "Safehouse", "type": "Point", "name": "Point7", "time": "2016-10-25T18:04:02.026Z" }, { "coordinates": [{ "lat": 1.3598080900508371, "lng": 103.87332916259766}], "disaster": "Safehouse", "type": "Point", "name": "Point8", "time": "2016-10-25T18:04:02.740Z" }, { "coordinates": [{ "lat": 1.3536300129282497, "lng": 103.85684967041016}], "disaster": "Safehouse", "type": "Point", "name": "Point9", "time": "2016-10-25T18:04:03.305Z" }, { "coordinates": [{ "lat": 1.3268581644182016, "lng": 103.8589096069336}], "disaster": "Safehouse", "type": "Point", "name": "Point10", "time": "2016-10-25T18:04:04.826Z" }, { "coordinates": [{ "lat": 1.3426467258886163, "lng": 103.8753890991211}], "disaster": "Safehouse", "type": "Point", "name": "Point11", "time": "2016-10-25T18:04:05.266Z" }, { "coordinates": [{ "lat": 1.3110695021746468, "lng": 103.86165618896484}], "disaster": "Safehouse", "type": "Point", "name": "Point12", "time": "2016-10-25T18:04:05.719Z" }, { "coordinates": [{ "lat": 1.3247987793801, "lng": 103.88225555419922}], "disaster": "Safehouse", "type": "Point", "name": "Point13", "time": "2016-10-25T18:04:06.136Z" }, { "coordinates": [{ "lat": 1.2959672103157076, "lng": 103.86234283447266}], "disaster": "Safehouse", "type": "Point", "name": "Point14", "time": "2016-10-25T18:04:06.581Z" }, { "coordinates": [{ "lat": 1.3055777701663411, "lng": 103.88362884521484}], "disaster": "Safehouse", "type": "Point", "name": "Point15", "time": "2016-10-25T18:04:06.974Z" }, { "coordinates": [{ "lat": 1.2877295585501318, "lng": 103.8698959350586}], "disaster": "Safehouse", "type": "Point", "name": "Point16", "time": "2016-10-25T18:04:07.438Z" }, { "coordinates": [{ "lat": 1.2973401496763173, "lng": 103.8863754272461}], "disaster": "Safehouse", "type": "Point", "name": "Point17", "time": "2016-10-25T18:04:08.270Z" }, { "coordinates": [{ "lat": 1.285670141442205, "lng": 103.87676239013672}], "disaster": "Safehouse", "type": "Point", "name": "Point18", "time": "2016-10-25T18:04:08.802Z" }, { "coordinates": [{ "lat": 1.2774324564241843, "lng": 103.6831283569336 }, { "lat": 1.233497694436404, "lng": 103.80672454833984 }, { "lat": 1.301458963284683, "lng": 103.99417877197266 }, { "lat": 1.2884160305498051, "lng": 104.0017318725586 }, { "lat": 1.242422002512647, "lng": 103.9468002319336 }, { "lat": 1.2149624976602746, "lng": 103.8156509399414 }, { "lat": 1.225946333447254, "lng": 103.71334075927734 }, { "lat": 1.2726271279562498, "lng": 103.6611557006836}], "disaster": "Terminator", "type": "Polygon", "name": "Area19", "time": "2016-10-25T18:04:22.710Z" }, { "coordinates": [{ "lat": 1.2726271279562498, "lng": 103.93306732177734 }, { "lat": 1.2520327621050023, "lng": 103.9255142211914 }, { "lat": 1.2492868343763082, "lng": 103.9419937133789 }, { "lat": 1.2774324564241843, "lng": 103.96053314208984}], "disaster": "Fire", "type": "Polygon", "name": "Area20", "time": "2016-10-25T18:04:35.119Z" }, { "coordinates": [{ "lat": 1.2492868343763082, "lng": 103.8644027709961 }, { "lat": 1.2369301241734323, "lng": 103.82320404052734 }, { "lat": 1.2341841807384084, "lng": 103.85753631591797}], "disaster": "Fire", "type": "Polygon", "name": "Area21", "time": "2016-10-25T18:04:39.082Z" }, { "coordinates": [{ "lat": 1.247333525405573, "lng": 103.69012052095854 }, { "lat": 1.269881221952627, "lng": 103.73531341552734 }, { "lat": 1.2149624976602746, "lng": 103.7222671508789 }, { "lat": 1.2396760647669485, "lng": 103.66802215576172}], "disaster": "Fire", "type": "Polygon", "name": "Area22", "time": "2016-10-25T18:04:43.301Z"}]));
+
+            $('.loadList li').click(function () {
+                $('.areaList').empty();
+                mapManager.clearMap();
+                loadMap($(this).data('map'));
+            });
+        });
+        function initMap() {
+            mapManager = new MapManager();
+            mapManager.initializeMap(document.getElementById('map'));
+            mapManager.areaManager.onAreaChangeCallback = function (area) {
+                createNewAreaItem(area);
+            };
+            mapManager.areaManager.onAreaLoadCallback = function (areas) {
+                $('.areaList').empty();
+                for (var i = 0; i < areas.length; i++) {
+                    createNewAreaItem(areas[i]);
+                }
+            }
+            mapManager.onAreaSpaceClickCallback = function (area) {
+                $('.areaList li').each(function () {
+                    if ($(this).data('area') == area) {
+                        $(this).click();
+                    }
+                });
+            }
+        }
+        //UI code
+        function createNewAreaItem(area) {
+            var areaClass = mapManager.getDisasterName(area.disaster).toLowerCase();
+            var areaItem = $('<li class="' + areaClass + '"><img src="' + getAreaIcon(mapManager.getDisasterName(area.disaster)) + '" class="icon" />' + area.name + '</li>').hide();
+            var closeIcon = $('<span class="closeIcon">x</span>');
+            closeIcon.click(function () {
+                mapManager.deleteArea(areaItem.data('area'));
+                $('.modifyAreaForm').hide();
+                areaItem.remove();
+            });
+            areaItem.append(closeIcon);
+            areaItem.prependTo($('.areaList')).slideDown(300);
+            console.log(area);
+            areaItem.data('area', area);
+            areaItem.click(function () {
+                dehighlightAllAreas();
+                mapManager.highlightArea($(this).data('area'));
+                areaItem.addClass('active');
+                fillModifyForm($(this).data('area'));
+                $('.modifyAreaForm').show();
+                $('.modifyAreaForm').css('top', ($(this).offset().top - $('.verticalOptions').offset().top) + 'px');
+            });
+        }
+        function getAreaIcon(disasterType) {
+            if (disasterType == 'Terminator')
+                return 'images/terminatoricon.png';
+            if (disasterType == 'Fire')
+                return 'images/fireicon.png';
+            if (disasterType == 'Safehouse')
+                return 'images/safehouseicon2.png';
+            if (disasterType == 'Thunderstorm')
+                return 'images/thundericon.png';
+            if (disasterType == 'Zombie')
+                return 'images/zombieicon.png';
+        }
+        function dehighlightAllAreas() {
+            $('.areaList li').each(function () {
+                $(this).removeClass('active');
+                mapManager.deHighlightArea($(this).data('area'));
+            });
+        }
+        function fillModifyForm(area) {
+            $('.modifyAreaForm .areaName').val(area.name);
+            $('.modifyAreaForm .areaType').text(mapManager.getDisasterName(area.disaster));
+        }
+        function loadMap(raw) {
+            mapManager.loadMap(raw);
+        }
+            </script> 
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap" async defer></script>
+    
+<div class="mapWrapper">
+            <div class="innerMapWrapper">
+            <div id="map"></div>
+                <div class="mapInfoPopup">
+                    <div class="mapInfoPopupInnerWrapper">
+                    <div class="crisisLabel">Crisis: Thunderstorm</div>
+                    <div class="severityLabel">Severity: 
+           <span class="radio"><span class="innerRadio"></span></span>
+           <span class="radio"><span class="innerRadio"></span></span>
+           <span class="radio"><span class="innerRadio"></span></span>
+           <span class="radio"><span class="innerRadio"></span></span>
+           <span class="radio"><span class="innerRadio"></span></span>
+                    </div>
+                        </div>
+                </div>
+            <div class="verticalOptionsWrapper">
+        <div class="verticalOptions">
+            <div class="typeWrapper">
+             <span class="typeLabel">Type</span></div>
+            <ul class="areaList">
+                <li class="zombie" disasterType="Zombie"><img src="images/zombieicon.png" class="icon">Zombie</li>
+                <li class="terminator" disasterType="Terminator"><img src="images/terminatoricon.png" class="icon">Terminator</li>
+                <li class="fire" disasterType="Fire"><img src="images/fireicon.png" class="icon">Zombie</li>
+                <li class="thunderstorm" disasterType="Thunderstorm"><img src="images/thundericon.png" class="icon">Thunderstorm</li>
+                <li class="safehouse" disasterType="Safehouse"><img src="images/safehouseicon.png" class="icon">Safehouse</li>
+            </ul>
+        </div>
+            <div class="modifyAreaForm" style="display: none;">
+                <span class="closeIcon">X</span>
+                <span class="label">Name</span>
+                <input type="text" value="Area2" class="areaName" />
+                <span class="label">Type</span>
+                <span class="areaType">Zombie</span>
+                <span class="label">Description</span>
+                <textarea class="areaDescription"></textarea>
+            </div>
+                </div>
+        <div class="btnPanel">
+            <div class="btn" id="toggleEditBtn" style="    width: 150px;">Edit mode: Off</div>
+            <div class="btn" id="markAreaBtn">Create area</div>
+            <div class="btn" id="clearMapBtn">Clear</div>
+            <div class="btn" id="saveMapBtn">Save map</div>
+        </div>
+                </div>
+        </div>
+        <div class="saveTextArea" style="
+    text-align: center;
+    margin-bottom: 100px;
+    margin-top: 36px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 20%;
+    font-size: 75%;"></div>
+<div class="wrapper">
+    <div>
+        <header class="main-header">
+            <!-- Logo -->
+            <a class="logo" style="">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">CMS</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">Crisis Management System</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+            </nav>
+        </header></div>
+</div>
+
+<div class="crisisReportForm">
+    <h1>Create crisis report</h1>
+    <
+</div>

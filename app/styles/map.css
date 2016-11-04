@@ -1,0 +1,344 @@
+
+          html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+          #map {
+    height: 400px;
+    width: 905px;
+    display: inline-block;
+    border: 3px solid #3d90c5;
+    margin-top: 10px;
+          }
+            .mapWrapper{
+    margin-top: -8%;
+    width: 177%;
+    text-align: center;
+    margin-left: -2%;
+    padding: 18px;
+    background: #2f2f2f;
+    border: 2px solid #000;
+    border-radius: 7px;
+    box-shadow: inset 3px 3px 3px #545454;
+            }
+          .innerMapWrapper{
+    padding: 14px 10px 0;
+    background: #3e3e3e;
+    border: 2px solid #444;
+    box-shadow: 0 0 9px #252525;}
+          .verticalOptionsWrapper{
+    display: inline-block;
+    vertical-align: top;
+    background: #303030;
+    box-shadow: 1px 1px 5px #151515, inset 3px 3px 3px #4c4c4c;
+    border: 2px solid #333;
+    border-radius: 7px;
+    padding: 12px 12px;
+          }
+            .verticalOptions{
+    background: #444444;
+    border: 1px solid #505050;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 14px #1b1b1b;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    padding: 10px 20px;
+    position: relative;
+    overflow: hidden;
+            }
+            .verticalOptions select{
+    display: block;
+    vertical-align: top;
+    width: 200px;
+    padding: 3px;
+    margin-top: 10px;
+    background: #424242;
+    color: #fff;
+    border: 3px solid #383838;
+    padding: 5px 3px;
+    box-shadow: 2px 2px 5px #3a3a3a;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+            }
+.verticalOptions select:hover {
+    background: #4185b1;
+}
+            .btnPanel{
+    box-sizing: border-box;
+    width: 905px;
+    display: inline-block;
+    margin-right: 306px;
+    text-align: left;
+    margin-top: -24px;
+    padding: 17px 13px 9px;
+    margin-left: 19px;
+    vertical-align: top;
+    border-radius: 5px;
+            }
+            .btnPanel .btn{
+    display: inline-block;
+    padding: 4px 19px;
+    background: #2f7eaf;
+    border: 2px solid #366e92;
+    cursor: pointer;
+    color: #daecf7;
+    border-radius: 2px;
+    box-shadow: inset 2px 2px 4px rgb(55, 138, 214), 1px 1px 2px #464646;
+    font-weight: 600;
+    font-size: 110%;
+    letter-spacing: 1px;
+    transition: all 0.25s ease;
+            }
+           .btnPanel .btn.active{
+    background: #48d076;
+    border: 2px solid #369266;
+    box-shadow: inset 2px 2px 4px rgb(126, 214, 168), 1px 1px 2px #3873c3;
+    color: #daf7ed;}
+.btnPanel .btn.active:hover {
+    background: #44e079;
+    border: 2px solid #369266;
+    box-shadow: inset 2px 2px 4px rgb(126, 214, 168), 1px 1px 2px #3873c3;
+    color: #daf7ed;
+}
+          .btnPanel #saveMapBtn{
+    background: #dca327;
+    border: 2px solid #ab8726;
+    box-shadow: inset 2px 2px 4px rgb(220, 180, 36), 1px 1px 2px #515151;
+    float: right;
+    color: #f5f0e5;
+    font-size: 78%;
+    padding: 8px 32px;
+    margin-top: 2px;}
+.btnPanel .btn:hover {
+    background: #2d95d6;
+    border: 2px solid #2972a0;
+    box-shadow: inset 2px 2px 4px rgb(93, 168, 236), 1px 1px 2px #3873c3;
+}
+          .areaList{
+              list-style: none;
+    padding: 0;
+    height: 328px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 89%;
+          }
+          .areaList li{
+    background: #ddd;
+    padding: 11px 18px;
+    width: 179px;
+    border: 2px solid #ccc;
+    border-width: 2px !important;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 9px;
+    font-family: 'Merriweather', serif;
+    box-shadow: inset 3px 3px 4px rgba(255, 255, 255, 0.5), inset 2px 20px 4px rgba(255, 255, 255, 0.27);
+          }
+          
+        .areaList li .icon{
+    width: 25px;
+    margin-right: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 1px;
+    margin-top: -4px;
+          }
+          .areaList li .closeIcon{
+    color: #555;
+    float: right;}
+        .areaList li.zombie {
+    background: #e8e1cf;
+    color: #9e762d;
+    border: 1px solid #b79a32;
+    transition: all 0.1s ease;
+        }
+        .areaList li.zombie:hover{
+    background: #e0daca;
+          }
+        .areaList li.zombie.active{
+    font-size: 105%;
+    background: #e6dcc2;
+    color: #9e762d;
+    font-weight: 600;
+    border: 1px solid #b79a32;
+          }
+        .areaList li.thunderstorm {
+    background: #84d4e1;
+    color: #0f6e9b;
+    border: 1px solid #0d6f85;
+        }
+        .areaList li.thunderstorm:hover{
+    background: #78cddb;
+          }
+        .areaList li.thunderstorm.active{
+    font-size: 105%;
+    background: #72cbda;
+    color: #0b6894;
+    font-weight: 600;
+    border: 1px solid #076377;
+          }
+        .areaList li.fire {
+    background: #e1abab;
+    color: #ae3737;
+    border: 1px solid #882424;
+        }
+        .areaList li.fire:hover{
+    background: #d8a4a4;
+          }
+        .areaList li.fire.active{
+    font-size: 105%;
+    background: #d69797;
+    color: #9c2b2b;
+    font-weight: 600;
+    border: 1px solid #7e1c1c;
+          }
+        .areaList li.terminator {
+    background: #eeeeee;
+    color: #777777;
+    border: 1px solid #666666;
+        }
+        .areaList li.terminator:hover{
+    background: #e0e0e0;
+          }
+        .areaList li.terminator.active{
+    font-size: 105%;
+    background: #e0e0e0;
+    color: #6a6a6a;
+    font-weight: 600;
+    border: 1px solid #616161;
+          }
+        .areaList li.safehouse {
+    background: #acecc2;
+    color: #249e6b;
+    border: 1px solid #3baa76;
+        }
+        .areaList li.safehouse:hover{
+    background: #a4eabc;
+          }
+        .areaList li.safehouse.active{
+    font-size: 105%;
+    background: #9fe6b7;
+    color: #249e6b;
+    font-weight: 600;
+    border: 1px solid #34a36f;
+          }
+          .modifyAreaForm{
+    position: absolute;
+    top: 0;
+    text-align: left;
+    width: 238px;
+    padding: 10px 35px 10px 25px;
+    background: #eef4fa;
+    border: 1px solid #cfe0e7;
+    left: 1168px;}
+.modifyAreaForm .label{
+    font-size: 90%;
+    font-weight: 600;
+    display: block;
+    margin-top: 9px;
+    margin-bottom: 3px;
+    color: #556a72;
+}
+.modifyAreaForm textarea,.modifyAreaForm input[type=text] {
+              width: 100%;
+              padding: 3px;
+              border: 1px solid #ccc;
+}
+.modifyAreaForm textarea{
+              height: 75px;
+              margin-bottom: 10px;
+          }
+          .modifyAreaForm .closeIcon{
+              cursor: pointer;
+    position: absolute;
+    right: 15px;
+    font-size: 85%;
+    color: #777;
+    margin-top: 5px;
+    margin-right: 7px;}
+          .typeLabel{
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: -8px;
+    display: block;
+          }
+          .typeWrapper{
+    margin-top: -10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 13px;
+    padding: 10px 20px 16px;
+    background: #424040;
+    border-bottom: 2px solid #383838;
+    box-shadow: inset 0px 3px 7px #1f1f1f;}
+          
+          .loadList{
+    position: absolute;
+    list-style: none;padding: 0;
+    margin-left: 50px;
+    
+          }
+.loadList li {
+    padding: 7px 15px;
+    background: #ddd;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+}
+
+.loadList li:active {
+    background: #ccc;
+}
+          .mapInfoPopup{
+    position: absolute;
+    display: inline-block;
+    width: 200px;
+    top: -11px;
+    left: 754px;
+    background: #56d090;
+    border: 2px solid #39b976;
+    padding: 4px;
+    height: 100px;
+    box-sizing: border-box;
+    box-shadow: inset 1px 1px 3px rgba(249, 249, 249, 0.47);}
+          .mapInfoPopup .mapInfoPopupInnerWrapper{
+    width: 100%;
+    background: #53ca8c;
+    border: 1px solid #99deb0;
+    height: 100%;
+          }
+          .mapInfoPopup .crisisLabel{
+    font-size: 130%;
+    line-height: 100%;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 9px;
+    color: #fff;
+    margin-top: 9px;}
+          .mapInfoPopup .severityLabel{
+    font-size: 90%;
+    color: #fff;}
+          .mapInfoPopup .radio{
+    background: #fff;
+    border-radius: 20px;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    border: 3.5px solid #df7b7b;
+    vertical-align: middle;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    margin-left: 0px;
+          }
+.mapInfoPopup .radio .innerRadio{
+    border-radius: 20px;
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    background: #df7b7b;
+    vertical-align: middle;
+    margin-top: -8px;
+}

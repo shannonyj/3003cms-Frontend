@@ -342,3 +342,20 @@
     vertical-align: middle;
     margin-top: -8px;
 }
+          .crisisReportForm {
+    position: fixed;
+    top: 9%;
+    left: 25%;
+    background: #fff;
+    padding: 25px;
+    display: none;
+          }
+          .crisisReportForm .formLabel{
+              display: block;
+              font-weight: 600;
+              margin: 10px 0;
+          }
+          .crisisReportForm h1{
+    font-size: 144%;}
+          .content-wrapper{
+    width: 1291px !important;}

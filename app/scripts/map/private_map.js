@@ -50,8 +50,6 @@ $(document).ready(function () {
         targetArea.location = $('.crisisReportForm #locationReport').val();
         targetArea.severity = $('.crisisReportForm #severityReport').val();
         var areaId = Number(targetArea.id);
-        console.log(areaId);
-        setTimeout(function () {
             for (var i = 0; i < mapManager.areaManager.currentAreas.length; i++) {
                 if (mapManager.areaManager.currentAreas[i].id == areaId) {
                     console.log(areaId);
@@ -60,15 +58,16 @@ $(document).ready(function () {
                     mapManager.areaManager.currentAreas[i].description = $('.crisisReportForm #descriptionReport').val();
                     mapManager.areaManager.currentAreas[i].location = $('.crisisReportForm #locationReport').val();
                     mapManager.areaManager.currentAreas[i].severity = $('.crisisReportForm #severityReport').val();
-                
-                    console.log(mapManager.areaManager.currentAreas[i]);}
+
+                    console.log(mapManager.areaManager.currentAreas[i]);
+                }
             }
-        }, 1250);
         var serializer = new Serializer();
         var newSerializedArea = serializer.serializeArea(targetArea);
         //Input url here************* Uncomment below
         // $.post('', { json: newSerializedArea }, function (data) { });
         $('.crisisReportForm,.overlay').hide();
+        $('#toggleEditBtn').click();
     });
     $('.mapInfoPopupInnerWrapper .infoBtn').click(function () {
         var areaData = $('.mapInfoPopup').data('area');

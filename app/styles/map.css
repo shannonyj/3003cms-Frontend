@@ -21,6 +21,7 @@
     border: 2px solid #000;
     border-radius: 7px;
     box-shadow: inset 3px 3px 3px #545454;
+    position: relative;
             }
           .innerMapWrapper{
     padding: 14px 10px 0;
@@ -303,8 +304,8 @@
     display: inline-block;
     display: none;
     width: 200px;
-    top: -11px;
-    left: 754px;
+    top: 8%;
+    left: 764px;
     background: #56d090;
     border: 2px solid #39b976;
     padding: 4px;

@@ -1,4 +1,5 @@
-   <script src="scripts/map/private_map.js" async defer></script>
+<script src="scripts/map/generic_map.js" async defer></script>   
+<script src="scripts/map/private_map.js" async defer></script>
     
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap" async defer></script>
     
@@ -73,18 +74,4 @@
     
 </div>
 
-<div class="crisisInfoForm">
-    <h1><span class="crisisName"></span> event</h1>
-    <span class="formLabel">Location:</span>
-    <span class="infoWrapper location">Nanyang Technological University</span>
-    <span class="formLabel">Name:</span>
-    <span class="infoWrapper name">Class 3 Thunderstorm</span>
-    <span class="formLabel">Time:</span>
-    <span class="infoWrapper time">12:15pm Wed, 16th Oct 2016</span>
-    <span class="formLabel">Severity:</span>
-    <span class="infoWrapper severity"></span>
-    <span class="formLabel">Description:</span>
-    <span class="infoWrapper description">Person requests for police assistance immediately.</span><br>
-    <div style="text-align: center;margin-top: 10px;"><span id="hideFormBtn" >Close</span></div>
-    
-</div>
+    <div ng-include="'view2/maps/crisis_info_form.html'"></div>

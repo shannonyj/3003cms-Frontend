@@ -538,3 +538,30 @@ div.timeline-item p.timeline-item-location {
     height: 100%;
     display: none;
 }
+.todoListBox{
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    border-top-color: #3c8dbc;
+    margin-top: 15px;
+    min-height: 300px;
+}
+.todoListBox .items{
+    list-style: none;
+    margin-top: 12px;
+    padding: 0;
+}
+.todoListBox .items li {
+    border-radius: 2px;
+    padding: 10px;
+    background: #f4f4f4;
+    margin-bottom: 2px;
+    border-left: 2px solid #e6e7e8;
+    color: #444;
+}

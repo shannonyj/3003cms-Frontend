@@ -68,9 +68,41 @@
                 "description":"",
                 "todoType": "dispatch"
             }];
+
+
         $scope.init = function(){
             var token;
-
+            token = localStorageService.get("token");
+            if (token) {
+                User.getProfile(token, function(data) {
+                    $rootScope.userData = data;
+                    $rootScope.userData.token = token;
+                    return console.log($rootScope.userData.token);
+                });
+            }
+            Incident.getIncidents($rootScope.userData.token, function(data) {
+                $rootScope.pushes.incidents = data;
+                initMap($rootScope, resetMarkers);
+            });
+            Incident.allIncidentUpdates($rootScope.userData.token, function(data) {
+                $rootScope.pushes.inciupdates = data;
+            });
+            Incident.allIncidentDispatches($rootScope.userData.token, function(data) {
+                $rootScope.pushes.dispatches = data;
+            });
+            Agency.getAgencies($rootScope.userData.token, function(data) {
+                $rootScope.agencies = data;
+            });
+            Incident.getIncidentTypes($rootScope.userData.token, function(data) {
+                var i;
+                $rootScope.incidentTypeDict = {};
+                i = 0;
+                while (i < data.length) {
+                    $rootScope.incidentTypeDict[data[i].value] = data[i].title;
+                    i++;
+                }
+            });
+            $rootScope.initialized = true;
         }
 
 

@@ -1,6 +1,6 @@
-
 var myApp = angular.module('myApp', [
   'ngRoute',
+  'ngCookies',
   'ngAnimate',
   'myApp.view1',
   'myApp.view2',
@@ -17,7 +17,7 @@ myApp.config(function($routeProvider) {
     // login page
       .when('/login', {
         templateUrl: 'view1/login.html',
-        controller: 'loginController'
+        controller: 'loginCtrl'
       })
 
 

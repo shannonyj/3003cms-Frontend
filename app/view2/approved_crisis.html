@@ -1,0 +1,42 @@
+  <script>
+      var mapManager;
+      $(document).ready(function () {
+          $('#markAreaBtn').click(function () {
+              mapManager.triggerMarkAreaClick();
+          });
+          setTimeout(function () {
+              $('.timeline li .timeline-item').click(function () {
+                  if ($(this).hasClass('unexpandedTimelineItem')) {
+                      $(this).removeClass('unexpandedTimelineItem', 500);
+                  }
+                  else {
+                      $(this).addClass('unexpandedTimelineItem', 350);
+                  }
+              });
+          }, 500);
+      });
+  </script>
+<h3 class="latestCrisisHeader">Latest crisis</h3>
+    <ul class="timeline">
+        <!-- timeline time label -->
+        <!--ng-repeat="(date, value) in timeline | groupBy: 'date'"-->
+        <li class="time-label" ng-repeat-start="(date, items) in timeline | orderBy: '-time' | groupBy: 'date'">
+                  <span class="bg-red">
+                    {{date}}
+                  </span>
+        </li>
+        <!-- /.timeline-label -->
+        <!-- timeline item -->
+        <li ng-repeat="item in items" ng-repeat-end>
+            <div class="latestCrisisBubbleIconWrapper">
+            <img src="images/zombieicon.png"/></div>
+            <div class="timeline-item unexpandedTimelineItem"" ng-include="'view2/timeline/' + item.timelineType + '.html'"></div>
+            
+
+        </li>
+
+        <!-- END timeline item -->
+        <li>
+            <i class="fa fa-clock-o bg-gray"></i>
+        </li>
+    </ul>

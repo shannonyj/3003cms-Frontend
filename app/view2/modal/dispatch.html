@@ -37,15 +37,15 @@
                 <span class="event-content">{{incident.description}}</span>
             </div>
 
-            <h3>Proposed Dispatch</h3>
+            <h3>Dispatch</h3>
             <hr>
             <div class="event-detail event-agency">
                 <span class="event-title">Agency:</span>
-                <span class="event-content">{{dispatch.agency.name}}</span>
+                <span class="event-content"><select><option>Police force</option><option>Fire department</option><option>Military</option></select></span>
             </div>
             <div class="event-detail event-resource">
                 <span class="event-title">Resources:</span>
-                <span class="event-content">{{dispatch.resource}}</span>
+                <span class="event-content"><select><option>A few police cars</option><option>SWAT team</option></select></span>
             </div>
             <div class="event-detail event-time">
                 <span class="event-title">Time:</span>
@@ -63,12 +63,8 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal" ng-click="cancel()">Close</button>
 
-            <button type="button" id="approve-dispatch-confirm" class="btn btn-outline" ng-click="dispatchApprove()">Confirm</button>
             <button type="button" id="approve-dispatch-cancel" class="btn btn-outline">Cancel</button>
-            <button type="button" id="approve-dispatch" class="btn btn-outline"><span>Approve</span></button>
-            <button type="button" id="reject-dispatch-confirm" class="btn btn-outline" ng-click="dispatchReject()">Confirm</button>
-            <button type="button" id="reject-dispatch-cancel" class="btn btn-outline">Cancel</button>
-            <button type="button" id="reject-dispatch" class="btn btn-outline"><span>Reject</span></button>
+            <button type="button" id="approve-dispatch" class="btn btn-outline"><span>Submit dispatch</span></button>
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

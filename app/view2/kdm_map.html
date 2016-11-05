@@ -1,0 +1,25 @@
+<script>
+    
+        function initMap() {
+            mapManager = new MapManager();
+            mapManager.initializeMap(document.getElementById('map'));
+            mapManager.areaManager.onAreaChangeCallback = function (area) {
+                createNewAreaItem(area);
+            };
+            mapManager.areaManager.onAreaLoadCallback = function (areas) {
+                for (var i = 0; i < areas.length; i++) {
+                    createNewAreaItem(areas[i]);
+                }
+                $('.crisisReportForm').hide();
+            }
+            mapManager.onAreaSpaceClickCallback = function (area) {
+            }
+        }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap" async defer></script>
+    
+<div class="mapWrapper">
+            <div class="innerMapWrapper">
+            <div id="map"></div>
+</div>
+</div>

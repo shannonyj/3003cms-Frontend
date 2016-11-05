@@ -12,10 +12,10 @@
     margin-top: 10px;
           }
             .mapWrapper{
-    margin-top: -8%;
-    width: 177%;
+    margin-top: 1%;
+    width: 103%;
     text-align: center;
-    margin-left: -2%;
+    margin-left: -1.5%;
     padding: 18px;
     background: #2f2f2f;
     border: 2px solid #000;
@@ -72,11 +72,11 @@
     display: inline-block;
     margin-right: 306px;
     text-align: left;
-    margin-top: -24px;
     padding: 17px 13px 9px;
     margin-left: 19px;
     vertical-align: top;
     border-radius: 5px;
+    margin-top: -67px;
             }
             .btnPanel .btn{
     display: inline-block;
@@ -128,7 +128,7 @@
           .areaList li{
     background: #ddd;
     padding: 11px 18px;
-    width: 179px;
+    width: 200px;
     border: 2px solid #ccc;
     border-width: 2px !important;
     cursor: pointer;
@@ -150,78 +150,84 @@
     color: #555;
     float: right;}
         .areaList li.zombie {
-    background: #e8e1cf;
-    color: #9e762d;
+    background: #cea22a;
+    color: #866323;
+    font-weight: 600;
     border: 1px solid #b79a32;
     transition: all 0.1s ease;
         }
         .areaList li.zombie:hover{
-    background: #e0daca;
+    background: #b58d20;
           }
         .areaList li.zombie.active{
     font-size: 105%;
-    background: #e6dcc2;
-    color: #9e762d;
+    background: #ad8313;
+    color: #ffffff;
     font-weight: 600;
     border: 1px solid #b79a32;
           }
         .areaList li.thunderstorm {
-    background: #84d4e1;
+    background: #2dc4dc;
     color: #0f6e9b;
+    font-weight: 600;
     border: 1px solid #0d6f85;
         }
         .areaList li.thunderstorm:hover{
-    background: #78cddb;
+    background: #10b1cb;
           }
         .areaList li.thunderstorm.active{
     font-size: 105%;
-    background: #72cbda;
-    color: #0b6894;
+    background: #1499ae;
+    color: #ffffff;
     font-weight: 600;
     border: 1px solid #076377;
           }
         .areaList li.fire {
-    background: #e1abab;
-    color: #ae3737;
+    background: #c54e4e;
+    color: #8e0707;
+    font-weight: 600;
     border: 1px solid #882424;
         }
         .areaList li.fire:hover{
-    background: #d8a4a4;
+    background: #bf4545;
           }
         .areaList li.fire.active{
     font-size: 105%;
-    background: #d69797;
-    color: #9c2b2b;
+    background: #942424;
+    color: #fff8f8;
     font-weight: 600;
     border: 1px solid #7e1c1c;
           }
         .areaList li.terminator {
-    background: #eeeeee;
-    color: #777777;
+    background: #8a8a8a;
+    color: #3e3e3e;
+    font-weight: 600;
     border: 1px solid #666666;
         }
         .areaList li.terminator:hover{
-    background: #e0e0e0;
+    background: #797979;
           }
         .areaList li.terminator.active{
     font-size: 105%;
-    background: #e0e0e0;
-    color: #6a6a6a;
+    background: #555555;
+    color: #ffffff;
     font-weight: 600;
     border: 1px solid #616161;
+    box-shadow: inset 3px 3px 4px rgba(255, 255, 255, 0.5), inset 2px 20px 4px rgba(161, 161, 161, 0.27);
           }
         .areaList li.safehouse {
-    background: #acecc2;
-    color: #249e6b;
+    color: #1b5f28;
     border: 1px solid #3baa76;
+    background: #1ed65d;
+    font-weight: 600;
         }
         .areaList li.safehouse:hover{
-    background: #a4eabc;
+    background: #18b54e;
           }
         .areaList li.safehouse.active{
     font-size: 105%;
-    background: #9fe6b7;
-    color: #249e6b;
+    background: #13943f;
+    color: #ffffff;
     font-weight: 600;
     border: 1px solid #34a36f;
           }
@@ -295,6 +301,7 @@
           .mapInfoPopup{
     position: absolute;
     display: inline-block;
+    display: none;
     width: 200px;
     top: -11px;
     left: 754px;
@@ -313,41 +320,106 @@
           .mapInfoPopup .crisisLabel{
     font-size: 130%;
     line-height: 100%;
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
     margin-bottom: 9px;
     color: #fff;
     margin-top: 9px;}
-          .mapInfoPopup .severityLabel{
+          .mapInfoPopup .crisisType{
+    font-size: 75%;
+    color: #d6f717;
+    font-weight: 600;
+    height: 16px;
+    display: block;}
+.mapInfoPopup .mapInfoPopupInnerWrapper .crisisName {
+    text-align: center;
     font-size: 90%;
-    color: #fff;}
-          .mapInfoPopup .radio{
-    background: #fff;
-    border-radius: 20px;
-    width: 18px;
-    height: 18px;
     display: inline-block;
-    border: 3.5px solid #df7b7b;
-    vertical-align: middle;
-    margin-top: 0px;
-    margin-bottom: 1px;
-    margin-left: 0px;
+    height: 19px;
+}
+          .mapInfoPopup .infoBtn{
+    background: #e2c020;
+    font-size: 75%;
+    font-weight: 600;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 5px;
+    margin-left: 7px;
+    border: 2px solid #c7ad31;
+    margin-top: -2px;
+    height: 23px;
+    cursor: pointer;}
+          .crisisInfoForm{
+    position: fixed;
+    top: 9%;
+    left: 33%;
+    background: #e2be5b;
+    padding: 25px;
+    width: 500px;
+    color: #fff;
+    display: none;
           }
-.mapInfoPopup .radio .innerRadio{
-    border-radius: 20px;
-    width: 7px;
-    height: 7px;
+          .crisisInfoForm h1{
+    font-size: 144%;
+    margin-top: 0;
+    padding: 20px;
+    background: #cca53a;
+    margin: 0;
+    margin-bottom: 18px;
+    border: 2px dashed #957a2f;}
+          .crisisInfoForm .formLabel{
+    display: block;
+    font-weight: 600;
+    margin: 10px 0;
+    background: #c29f3f;
+    padding: 3px 13px;
+          }
+          .crisisInfoForm input, .crisisInfoForm select, .crisisInfoForm textarea{
+    background: #fff;
+    border: 3px solid #ffa7a7;
+    width: 100%;
+    line-height: 25px;
+    color: #333;
+    padding: 3px;
+    box-sizing: border-box;
+          }
+          .crisisInfoForm textarea{
+              height: 75px;
+          }
+          .crisisInfoForm select{
+    color: #d68e8b;
+    width: 20%;
+    text-align: center !important;
+    padding-left: 28px;
+    cursor: pointer;
+          }
+          .crisisInfoForm #hideFormBtn{
+    cursor: pointer;
+    background: #9d7f2e;
     display: inline-block;
-    background: #df7b7b;
+    padding: 5px 33px;
+    border: 1px solid #806722;}
+          .crisisInfoForm .infoWrapper {
+    display: block;
+    margin: 15px;
+}
+          .crisisInfoForm .severityBar .radio .innerRadio {
+    border-radius: 20px;
+    width: 5px;
+    height: 6px;
+    display: inline-block;
+    background: #dddddd;
     vertical-align: middle;
-    margin-top: -8px;
+    margin-top: -10px;
+    margin-left: 3px;
 }
           .crisisReportForm {
     position: fixed;
     top: 9%;
-    left: 25%;
-    background: #fff;
+    left: 33%;
+    background: #e25b5b;
     padding: 25px;
+    width: 500px;
+    color: #fff;
     display: none;
           }
           .crisisReportForm .formLabel{
@@ -355,7 +427,78 @@
               font-weight: 600;
               margin: 10px 0;
           }
+          .crisisReportForm input, .crisisReportForm select, .crisisReportForm textarea{
+    background: #fff;
+    border: 3px solid #ffa7a7;
+    width: 100%;
+    line-height: 25px;
+    color: #333;
+    padding: 3px;
+    box-sizing: border-box;
+          }
+          .crisisReportForm textarea{
+              height: 75px;
+          }
+          .crisisReportForm select{
+    color: #d68e8b;
+    width: 20%;
+    text-align: center !important;
+    padding-left: 28px;
+    cursor: pointer;
+          }
+          .crisisReportForm #submitFormBtn{
+    cursor: pointer;
+    background: #a54a4a;
+    display: inline-block;
+    padding: 5px 33px;
+    border: 1px solid #ff7373;}
           .crisisReportForm h1{
-    font-size: 144%;}
+    font-size: 144%;
+    margin-top: 0;
+    padding: 20px;
+    background: #ce5656;
+    margin: -16px;
+    margin-bottom: 12px;}
           .content-wrapper{
     width: 1291px !important;}
+          .severityBarWrapper{
+    width: 59%;
+    display: inline-block;
+          }
+          .severityBar{
+    padding: 0;}
+          .severityBar li.active{
+    padding: 0;}
+          
+          .mapInfoPopup .severityLabel{
+    font-size: 90%;
+    color: #fff;}
+          .severityBar .radio{
+    background: #fff;
+    border-radius: 20px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    border: 2.5px solid #ddd;
+    vertical-align: middle;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    margin-left: 0px;
+    margin-right: 3px;
+          }
+          
+          .severityBar .radio.active{
+    border: 2.5px solid #7bdfa6;
+          }
+.severityBar .radio .innerRadio{
+    border-radius: 20px;
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #dddddd;
+    vertical-align: middle;
+    margin-top: -9px;
+}
+.severityBar .radio.active .innerRadio {
+    background: #7bdfa6;
+}

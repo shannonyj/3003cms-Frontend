@@ -25,70 +25,15 @@
 <section class="content">
 
     <!-- Info boxes -->
-    <div class="row" ng-include="'view2/header_status.html'">
-
-    </div><!-- /.row -->
-
+    <div class="row statusWrapper" ng-include="'view2/header_status.html'">
+    </div>
+    <div class="map" ng-include="'view2/private_map.html'"></div>
     <!--Location Sample-->
-    {{$root.incidents}}<br><br>
+    {{$root.incidents}}
     <div ng-repeat="incident in $root.incidents">{{incident.location}} - {{incident.name}}</div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Map -->
-            <div class="box">
-                <div class="box box-success" ng-include="'views/map.html'">
 
-                </div><!-- /.box -->
-            </div><!-- /.box -->
-
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-md-12">
-
-
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
-    <!-- Main row -->
-    <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-7 connectedSortable-disabled">
-            <div class="map" ng-include="'view2/private_map.html'">
-        </section><!-- right col -->
-    </div><!-- /.row (main row) -->
-
-    <ul class="timeline">
-        <!-- timeline time label -->
-        <!--ng-repeat="(date, value) in timeline | groupBy: 'date'"-->
-        <li class="time-label" ng-repeat-start="(date, items) in timeline | orderBy: '-time' | groupBy: 'date'">
-                  <span class="bg-red">
-                    {{date}}
-                  </span>
-        </li>
-        <!-- /.timeline-label -->
-        <!-- timeline item -->
-        <li ng-repeat="item in items" ng-repeat-end>
-
-            <i ng-show="item.timelineType=='incident'" class="fa fa-warning bg-red"></i>
-            <i ng-show="item.timelineType=='dispatch'" class="fa fa-ambulance bg-blue"></i>
-            <i ng-show="item.timelineType=='update'" class="fa fa-heartbeat bg-aqua"></i>
-
-            <div class="timeline-item" ng-include="'view2/timeline/' + item.timelineType + '.html'"></div>
-            <div style="padding-left: 50em;">
-                <a href="#" class="myButton1">Post on Facebook</a>
-                <a href="#" class="myButton">Post on Twitter</a>
-            </div>
-
-        </li>
-
-        <!-- END timeline item -->
-        <li>
-            <i class="fa fa-clock-o bg-gray"></i>
-        </li>
-    </ul>
-
+            <div class="map" ng-include="'view2/approved_crisis.html'">
+</div>
 </section><!-- /.content -->
 <script src="scripts/controllers/js/timeline.js"></script>

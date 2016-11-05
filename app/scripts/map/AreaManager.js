@@ -6,6 +6,7 @@
 var AreaManager = (function () {
     function AreaManager(map) {
         this.currentAreas = [];
+        this.idCount = 1;
         this.areaCounter = 1;
         this.currentMap = map;
     }
@@ -33,7 +34,8 @@ var AreaManager = (function () {
             coordinates.push(markers[i].position);
         }
         var markedArea = new google.maps.Polygon($.extend({
-            paths: coordinates }, config.polygonStyle));
+            paths: coordinates
+        }, config.polygonStyle));
         markedArea.setMap(this.currentMap);
         if (this.parentMapManager != null)
             this.parentMapManager._onAreaCreatedMapManagerCallback(markedArea);
@@ -44,12 +46,30 @@ var AreaManager = (function () {
         area.time = new Date();
         area.type = AreaType.Polygon;
         area.name = 'Area' + this.areaCounter++;
+        area.id = this.idCount++;
         this.currentAreas.push(area);
         this.onAreaChangeCallback(area);
     };
     AreaManager.prototype.serializeCurrentMap = function () {
         var serializer = new Serializer();
         return serializer.serializeAreaList(this.currentAreas);
+    };
+    AreaManager.prototype.hideArea = function (areaId) {
+        for (var i = 0; i < this.currentAreas.length; i++) {
+            if (this.currentAreas[i].id == areaId) {
+                this.currentAreas[i].polygon.setVisible(false);
+            }
+        }
+    };
+    AreaManager.prototype.showArea = function (areaId) {
+        var area = null;
+        console.log('showing');
+        for (var i = 0; i < this.currentAreas.length; i++) {
+            if (this.currentAreas[i].id == areaId) {
+                area = this.currentAreas[i];
+                area.polygon.setVisible(true);
+            }
+        }
     };
     AreaManager.prototype.loadAreasFromString = function (raw) {
         var deserialized = new Serializer().deserializeAreaList(raw);
@@ -67,7 +87,8 @@ var AreaManager = (function () {
             }
             else {
                 var markedArea = new google.maps.Polygon($.extend({
-                    paths: deserialized[i].serializablePolygon }, config.polygonStyle));
+                    paths: deserialized[i].serializablePolygon
+                }, config.polygonStyle));
                 deserialized[i].polygon = markedArea;
                 if (this.parentMapManager != null)
                     this.parentMapManager._onAreaCreatedMapManagerCallback(markedArea);
@@ -78,4 +99,4 @@ var AreaManager = (function () {
         this.onAreaLoadCallback(this.currentAreas);
     };
     return AreaManager;
-}());
+} ());

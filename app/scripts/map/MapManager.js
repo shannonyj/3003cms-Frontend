@@ -46,6 +46,12 @@ var MapManager = (function () {
             area.polygon.setOptions(areaConfig.polygonStyle);
         }
     };
+    MapManager.prototype.hideArea = function (area) {
+        this.areaManager.hideArea(area.id);
+    };
+    MapManager.prototype.showArea = function (area) {
+        this.areaManager.showArea(area.id);
+    };
     MapManager.prototype.setDisasterType = function (name) {
         switch (name) {
             case 'Zombie':

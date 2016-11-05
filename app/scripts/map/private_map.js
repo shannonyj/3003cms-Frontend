@@ -50,18 +50,18 @@ $(document).ready(function () {
         targetArea.location = $('.crisisReportForm #locationReport').val();
         targetArea.severity = $('.crisisReportForm #severityReport').val();
         var areaId = Number(targetArea.id);
-            for (var i = 0; i < mapManager.areaManager.currentAreas.length; i++) {
-                if (mapManager.areaManager.currentAreas[i].id == areaId) {
-                    console.log(areaId);
-                    console.log('found area match');
-                    mapManager.areaManager.currentAreas[i].name = $('.crisisReportForm #nameReport').val();
-                    mapManager.areaManager.currentAreas[i].description = $('.crisisReportForm #descriptionReport').val();
-                    mapManager.areaManager.currentAreas[i].location = $('.crisisReportForm #locationReport').val();
-                    mapManager.areaManager.currentAreas[i].severity = $('.crisisReportForm #severityReport').val();
+        for (var i = 0; i < mapManager.areaManager.currentAreas.length; i++) {
+            if (mapManager.areaManager.currentAreas[i].id == areaId) {
+                console.log(areaId);
+                console.log('found area match');
+                mapManager.areaManager.currentAreas[i].name = $('.crisisReportForm #nameReport').val();
+                mapManager.areaManager.currentAreas[i].description = $('.crisisReportForm #descriptionReport').val();
+                mapManager.areaManager.currentAreas[i].location = $('.crisisReportForm #locationReport').val();
+                mapManager.areaManager.currentAreas[i].severity = $('.crisisReportForm #severityReport').val();
 
-                    console.log(mapManager.areaManager.currentAreas[i]);
-                }
+                console.log(mapManager.areaManager.currentAreas[i]);
             }
+        }
         var serializer = new Serializer();
         var newSerializedArea = serializer.serializeArea(targetArea);
         //Input url here************* Uncomment below
@@ -76,7 +76,9 @@ $(document).ready(function () {
         $('.crisisInfoForm .name').text(areaData.name);
         $('.crisisInfoForm .time').text(new Date().toTimeString());
         $('.crisisInfoForm .description').text(areaData.description);
-        $('.crisisInfoForm .severity').html(generateSeverityBar(2));
+        var severity = 2;
+        if (areaData.severity != null) severity = areaData.severity;
+        $('.crisisInfoForm .severity').html(generateSeverityBar(severity));
         $('.crisisInfoForm,.overlay').show();
     });
 });

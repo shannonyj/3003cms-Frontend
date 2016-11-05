@@ -1,0 +1,4 @@
+// TypeScript
+class CrisisDataManager{
+
+}

@@ -1,8 +1,8 @@
 <script>
     var mapManager;
     $(document).ready(function () {
-        $('.to-do-list-dispatch .close').click(function () {
-            $('.to-do-list-dispatch').hide();
+        $('.to-do-list-dispatch .close,#approve-dispatch-cancel').click(function () {
+            $('.to-do-list-dispatch,.overlay').hide();
         });
         setTimeout(function () {
             mapManager.clearMap();
@@ -29,6 +29,25 @@
         $('#hideDispatchFormBtn').click(function () {
             $('.dispatchInfoForm,.overlay').hide();
         });
+        $('.mapDispatchInfoPopup').click(function () {
+            $('.dispatchInfoForm,.overlay').show();
+        });
+        $('.createMapDispatchInfoPopup').click(function () {
+            loadCreateDispatchForm($(this).data('area'));
+        });
+        $('#approve-dispatch').click(function () {
+            $('.to-do-list-dispatch,.overlay,.createMapDispatchInfoPopup').hide();
+            var area = $('.createMapDispatchInfoPopup').data('area');
+            area.dispatch = {};
+            area.dispatch.agency = $('.to-do-list-dispatch .agency').val();
+            area.dispatch.resource = $('.to-do-list-dispatch .resource').val();
+            area.dispatch.contact = $('.to-do-list-dispatch .contact').val();
+            $('.to-do-list-dispatch .agency option')[0].selected = true;
+            $('.to-do-list-dispatch .resource option')[0].selected = true;
+            $('.to-do-list-dispatch .contact').val('');
+            $('.to-do-list-dispatch .time').val('');
+                $('.mapDispatchInfoPopup').show();
+        });
     });
     function loadMap(raw) {
         mapManager.loadMap(raw);
@@ -47,10 +66,31 @@
         }
         mapManager.onAreaSpaceClickCallback = function (area) {
             genericOnAreaSpaceClickCallback(area);
+            $('.to-do-list-dispatch .location').text(area.location);
+            if (area.dispatch != null) {
+                $('.mapDispatchInfoPopup').show();
+                $('.createMapDispatchInfoPopup').hide();
+                $('.dispatchInfoForm .agency').text(area.dispatch.agency);
+                $('.dispatchInfoForm .resource').text(area.dispatch.resource);
+                $('.dispatchInfoForm .contact').text(area.dispatch.contact);
+            }
+            else {
+                $('.createMapDispatchInfoPopup').show().data('area', area);
+                $('.mapDispatchInfoPopup').hide();
+            }
         };
 
     }
-
+    function loadCreateDispatchForm(area) {
+        $('.to-do-list-dispatch .disasterType').text(mapManager.getDisasterName(area.disaster));
+        $('.to-do-list-dispatch .location').text(area.location);
+        $('.to-do-list-dispatch .time').text(new Date().toTimeString());
+        $('.to-do-list-dispatch .description').text(area.description);
+        var severity = 2;
+        if (area.severity != null) severity = area.severity;
+        $('.to-do-list-dispatch .severity').html(generateSeverityBar(severity));
+        $('.to-do-list-dispatch,.overlay').show();
+    }
 </script>
 <script src="scripts/map/generic_map.js" async defer></script>  
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap" async defer></script>
@@ -81,10 +121,14 @@
                     </ul>
                 </div></div></div>
             <div id="map"></div>
-                <div class="mapDispatchInfoPopup">
+                <div class="createMapDispatchInfoPopup mapInfoPopupTypes">
+                    <div class="mapDispatchInfoPopupInnerWrapper">
+                    <div class="crisisLabel">Create dispatch</span></div>
+                        </div>
+                </div>
+                <div class="mapDispatchInfoPopup mapInfoPopupTypes">
                     <div class="mapDispatchInfoPopupInnerWrapper">
                     <div class="crisisLabel">Dispatch status</span></div>
-                        
                         </div>
                 </div>
                 <div class="mapInfoPopup">
@@ -106,69 +150,57 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">×</span></button>
-            <h4 class="modal-title ng-binding">&lt;&gt;: Dispatch Requires Approval</h4>
+            <h4 class="modal-title ng-binding">Dispatching resources for crisis</h4>
         </div>
         <div class="modal-body">
             <h3>Crisis Event</h3>
             <hr>
             <div class="event-detail event-type">
                 <span class="event-title">Event Type:</span>
-                <span class="event-content ng-binding"></span>
+                <span class="event-content ng-binding disasterType"></span>
             </div>
             <div class="event-detail event-time">
                 <span class="event-title">Time:</span>
-                <span class="event-content ng-binding"></span>
+                <span class="event-content ng-binding time"></span>
             </div>
             <div class="event-detail event-location">
                 <span class="event-title">Location:</span>
-                <span class="event-content ng-binding"></span>
+                <span class="event-content ng-binding location"></span>
             </div>
             <div class="event-detail event-severity">
                 <span class="event-title">Severity:</span>
-                <span class="event-content">
-                  <div class="severity-value ng-binding" style="display: none;"></div>
-                  <div id="event-severity-check">
-                      <input type="radio" name="sev1" class="flat-yellow" ng-checked="incident.severity >= 1" disabled="">
-                      <input type="radio" name="sev2" class="flat-yellow" ng-checked="incident.severity >= 2" disabled="">
-                      <input type="radio" name="sev3" class="flat-yellow" ng-checked="incident.severity >= 3" disabled="">
-                      <input type="radio" name="sev4" class="flat-yellow" ng-checked="incident.severity >= 4" disabled="">
-                      <input type="radio" name="sev5" class="flat-yellow" ng-checked="incident.severity >= 5" disabled="">
-                  </div>
+                <span class="event-content severity">
                 </span>
             </div>
-            <div class="event-detail event-description ng-hide" ng-hide="!incident.description">
+            <div class="event-detail event-description">
                 <span class="event-title">Description: </span>
-                <span class="event-content ng-binding"></span>
+                <span class="event-content ng-binding description"></span>
             </div>
 
             <h3>Dispatch</h3>
             <hr>
             <div class="event-detail event-agency">
                 <span class="event-title">Agency:</span>
-                <span class="event-content"><select><option value="Police force">Police force</option><option value="Fire department">Fire department</option><option value="Military">Military</option></select></span>
+                <span class="event-content"><select class="agency"><option value="Police force">Police force</option><option value="Fire department">Fire department</option><option value="Military">Military</option></select></span>
             </div>
             <div class="event-detail event-resource">
                 <span class="event-title">Resources:</span>
-                <span class="event-content"><select><option value="A few police cars">A few police cars</option><option value="SWAT team">SWAT team</option></select></span>
+                <span class="event-content"><select class="resource"><option value="A few police cars">A few police cars</option><option value="SWAT team">SWAT team</option></select></span>
             </div>
             <div class="event-detail event-time">
                 <span class="event-title">Time:</span>
-                <span class="event-content ng-binding"></span>
+                <input type="text" class="time">
             </div>
             <div class="event-detail event-contact">
                 <span class="event-title">Contact:</span>
-                <span class="event-content ng-binding"></span>
-            </div>
-            <div class="event-detail event-email">
-                <span class="event-title">Email:</span>
-                <span class="event-content ng-binding"></span>
+                <input type="text" class="contact">
             </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal" ng-click="cancel()">Close</button>
 
             <button type="button" id="approve-dispatch-cancel" class="btn btn-outline">Cancel</button>
-            <button type="button" id="approve-dispatch" class="btn btn-outline"><span>Submit dispatch</span></button>
+            <button type="button" id="approve-dispatch" class="btn btn-outline"><span>Dispatch</span></button>
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog --></div>
@@ -181,9 +213,9 @@
     <span class="formLabel">Location:</span>
     <span class="infoWrapper location">Nanyang Technological University</span>
     <span class="formLabel">Agency:</span>
-    <span class="infoWrapper name">Police force</span>
+    <span class="infoWrapper agency">Police force</span>
     <span class="formLabel">Resource:</span>
-    <span class="infoWrapper time">A few police cars</span>
+    <span class="infoWrapper resource">A few police cars</span>
     <span class="formLabel">Contact:</span>
-    <span class="infoWrapper description">+65 97321432 (Mr James, Police Officer)</span><br>
+    <span class="infoWrapper contact">+65 97321432 (Mr James, Police Officer)</span><br>
     <div style="text-align: center;margin-top: 10px;"><span id="hideDispatchFormBtn" >Close</span></div></div>

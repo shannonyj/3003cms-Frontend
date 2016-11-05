@@ -1,6 +1,6 @@
 
 function dehighlightAllAreas(hidePopup){
-    if (hidePopup) $('.mapInfoPopup').hide();
+    if (hidePopup) $('.mapInfoPopup,.mapInfoPopupTypes').hide();
     for (var i = mapManager.areaManager.currentAreas.length - 1; i >= 0; i--) {
             mapManager.deHighlightArea(mapManager.areaManager.currentAreas[i]);
         }

@@ -19,7 +19,7 @@
       }
     });
     $scope.$on('$viewContentLoaded', function() {
-      initMap($scope, resetMarkers);
+      //initMap($scope, resetMarkers);
       $rootScope.isPublic = true;
     });
 

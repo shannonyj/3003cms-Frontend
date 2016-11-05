@@ -17,11 +17,11 @@ $(document).ready(function () {
     });
     $('#toggleEditBtn').click(function () {
         if ($(this).hasClass('active')) {
-            $(this).removeClass('active').text('Edit mode: Off');
+            $(this).removeClass('active').text('New crisis');
             mapManager.setEditable(false);
         }
         else {
-            $(this).addClass('active').text('Edit mode: On');
+            $(this).addClass('active').text('New crisis');
             mapManager.setEditable(true);
             dehighlightAllAreas(true);
         }
@@ -31,7 +31,7 @@ $(document).ready(function () {
         $('.modifyAreaForm').hide();
     });
     $('#hideFormBtn').click(function () {
-        $('.crisisInfoForm').hide();
+        $('.crisisInfoForm,.overlay').hide();
     });
     setTimeout(function () {
         mapManager.clearMap();
@@ -49,11 +49,26 @@ $(document).ready(function () {
         targetArea.description = $('.crisisReportForm #descriptionReport').val();
         targetArea.location = $('.crisisReportForm #locationReport').val();
         targetArea.severity = $('.crisisReportForm #severityReport').val();
+        var areaId = Number(targetArea.id);
+        console.log(areaId);
+        setTimeout(function () {
+            for (var i = 0; i < mapManager.areaManager.currentAreas.length; i++) {
+                if (mapManager.areaManager.currentAreas[i].id == areaId) {
+                    console.log(areaId);
+                    console.log('found area match');
+                    mapManager.areaManager.currentAreas[i].name = $('.crisisReportForm #nameReport').val();
+                    mapManager.areaManager.currentAreas[i].description = $('.crisisReportForm #descriptionReport').val();
+                    mapManager.areaManager.currentAreas[i].location = $('.crisisReportForm #locationReport').val();
+                    mapManager.areaManager.currentAreas[i].severity = $('.crisisReportForm #severityReport').val();
+                
+                    console.log(mapManager.areaManager.currentAreas[i]);}
+            }
+        }, 1250);
         var serializer = new Serializer();
         var newSerializedArea = serializer.serializeArea(targetArea);
         //Input url here************* Uncomment below
         // $.post('', { json: newSerializedArea }, function (data) { });
-        $('.crisisReportForm').hide();
+        $('.crisisReportForm,.overlay').hide();
     });
     $('.mapInfoPopupInnerWrapper .infoBtn').click(function () {
         var areaData = $('.mapInfoPopup').data('area');
@@ -63,7 +78,7 @@ $(document).ready(function () {
         $('.crisisInfoForm .time').text(new Date().toTimeString());
         $('.crisisInfoForm .description').text(areaData.description);
         $('.crisisInfoForm .severity').html(generateSeverityBar(2));
-        $('.crisisInfoForm').show();
+        $('.crisisInfoForm,.overlay').show();
     });
 });
 function initMap() {
@@ -71,18 +86,21 @@ function initMap() {
     mapManager.initializeMap(document.getElementById('map'));
     mapManager.areaManager.onAreaChangeCallback = function (area) {
         createNewAreaItem(area);
-        setTimeout(function () { $('.crisisReportForm').show();}, 250);
+        setTimeout(function () { $('.crisisReportForm,.overlay').show();}, 250);
     };
     mapManager.areaManager.onAreaLoadCallback = function (areas) {
         for (var i = 0; i < areas.length; i++) {
             createNewAreaItem(areas[i]);
         }
-        $('.crisisReportForm').hide();
+        $('.crisisReportForm,.overlay').hide();
     }
     mapManager.onAreaSpaceClickCallback = function (area) {
+        console.log(area.id);
         $('.mapInfoPopupInnerWrapper .crisisType').html(DisasterType[area.disaster]);
         $('.mapInfoPopupInnerWrapper .crisisName').html(area.name);
-        $('.severityBarWrapper').empty().append(generateSeverityBar(2));
+        var severity = 2;
+        if (area.severity != null) severity = area.severity;
+        $('.severityBarWrapper').empty().append(generateSeverityBar(severity));
         $('.mapInfoPopup').show();
         $('.mapInfoPopup').animate({ width: '202px', height: '102px', 'margin-left': '-1px', 'font-size': '105%' }, 250, 'easeOutBounce').animate({ width: '200px', height: '100px', 'margin-left': '0px', 'font-size': '100%' }, 250, 'easeOutBounce');
         $('.mapInfoPopup').data('area', area);
@@ -98,6 +116,7 @@ function dehighlightAllAreas(hidePopup){
 }
 function createNewAreaItem(area) {
     $('.crisisReportForm input').val('');
+    $('.crisisReportForm textarea').val('');
     $('#disasterTypeReport').text(mapManager.getDisasterName(area.disaster));
     $('#disasterTimeReport').text(new Date().toString());
     $('#submitFormBtn').data('area', area);

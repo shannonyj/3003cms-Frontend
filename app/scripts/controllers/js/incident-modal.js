@@ -4,12 +4,12 @@ function initIncidentModalIncident($scope) {
     $scope.incident.formattedTime = mmt.format("DD/MM/YYYY hh:mm");
 
     setTimeout(function() {
-        var ichecks = $('div#event-severity-check input[type="checkbox"].flat-yellow, input[type="radio"].flat-yellow');
+      /*  var ichecks = $('div#event-severity-check input[type="checkbox"].flat-yellow, input[type="radio"].flat-yellow');
         ichecks.iCheck({
             checkboxClass: 'icheckbox_flat-yellow',
             radioClass: 'iradio_flat-yellow',
             disabledClass: 'non-clickable'
-        });
+        }); */
 
     }, 200);
 

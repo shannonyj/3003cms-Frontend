@@ -352,12 +352,13 @@
           .crisisInfoForm{
     position: fixed;
     top: 9%;
-    left: 33%;
+    left: 40%;
     background: #e2be5b;
     padding: 25px;
     width: 500px;
     color: #fff;
     display: none;
+    z-index: 1000;
           }
           .crisisInfoForm h1{
     font-size: 144%;
@@ -416,12 +417,13 @@
           .crisisReportForm {
     position: fixed;
     top: 9%;
-    left: 33%;
+    left: 40%;
     background: #e25b5b;
     padding: 25px;
     width: 500px;
     color: #fff;
     display: none;
+    z-index: 1000;
           }
           .crisisReportForm .formLabel{
               display: block;

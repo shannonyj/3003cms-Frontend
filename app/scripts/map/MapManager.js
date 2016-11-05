@@ -113,6 +113,7 @@ var MapManager = (function () {
                 if (isAVisibleMapItem) {
                     for (var i = 0; i < curInst.areaManager.currentAreas.length; i++) {
                         if (curInst.areaManager.currentAreas[i].polygon == mapObject) {
+                            console.log(curInst.areaManager.currentAreas[i]);
                             curInst.onAreaSpaceClickCallback(curInst.areaManager.currentAreas[i]);
                         }
                     }

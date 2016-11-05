@@ -18,6 +18,7 @@ var AreaManager = (function () {
         area.time = new Date();
         area.type = AreaType.Point;
         area.name = 'Point' + this.areaCounter++;
+        area.id = this.idCount++;
         if (this.parentMapManager != null)
             this.parentMapManager._onAreaCreatedMapManagerCallback(marker[0]);
         this.currentAreas.push(area);
@@ -34,8 +35,7 @@ var AreaManager = (function () {
             coordinates.push(markers[i].position);
         }
         var markedArea = new google.maps.Polygon($.extend({
-            paths: coordinates
-        }, config.polygonStyle));
+            paths: coordinates }, config.polygonStyle));
         markedArea.setMap(this.currentMap);
         if (this.parentMapManager != null)
             this.parentMapManager._onAreaCreatedMapManagerCallback(markedArea);
@@ -46,9 +46,17 @@ var AreaManager = (function () {
         area.time = new Date();
         area.type = AreaType.Polygon;
         area.name = 'Area' + this.areaCounter++;
-        area.id = this.idCount++;
+        area.id = this.idCount;
         this.currentAreas.push(area);
-        this.onAreaChangeCallback(area);
+        var curInst = this;
+        this.idCount++;
+        this.onAreaChangeCallback((function getArea() {
+            for (var i = 0; i < curInst.currentAreas.length; i++) {
+                if (curInst.currentAreas[i].id == area.id) {
+                    return curInst.currentAreas[i];
+                }
+            }
+        })());
     };
     AreaManager.prototype.serializeCurrentMap = function () {
         var serializer = new Serializer();
@@ -63,13 +71,24 @@ var AreaManager = (function () {
     };
     AreaManager.prototype.showArea = function (areaId) {
         var area = null;
-        console.log('showing');
         for (var i = 0; i < this.currentAreas.length; i++) {
             if (this.currentAreas[i].id == areaId) {
                 area = this.currentAreas[i];
-                area.polygon.setVisible(true);
             }
         }
+        area.polygon.setVisible(true);
+        var opacity = [0, 0];
+        var interval = setInterval(function () {
+            if (opacity[0] >= 0.8 && opacity[1] >= 0.35) {
+                clearInterval(interval);
+                area.polygon.setVisible(false);
+            }
+            else {
+                opacity[0] = Math.max(0.0, opacity[0] + 0.055);
+                opacity[1] = Math.max(0.0, opacity[1] + 0.025);
+                area.polygon.setOptions({ strokeOpacity: opacity[0], fillOpacity: opacity[1] });
+            }
+        }, 50);
     };
     AreaManager.prototype.loadAreasFromString = function (raw) {
         var deserialized = new Serializer().deserializeAreaList(raw);
@@ -87,8 +106,7 @@ var AreaManager = (function () {
             }
             else {
                 var markedArea = new google.maps.Polygon($.extend({
-                    paths: deserialized[i].serializablePolygon
-                }, config.polygonStyle));
+                    paths: deserialized[i].serializablePolygon }, config.polygonStyle));
                 deserialized[i].polygon = markedArea;
                 if (this.parentMapManager != null)
                     this.parentMapManager._onAreaCreatedMapManagerCallback(markedArea);
@@ -99,4 +117,4 @@ var AreaManager = (function () {
         this.onAreaLoadCallback(this.currentAreas);
     };
     return AreaManager;
-} ());
+}());

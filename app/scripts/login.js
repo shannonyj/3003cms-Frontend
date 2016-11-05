@@ -11,7 +11,7 @@
      * # AboutCtrl
      * Controller of the tbcCmsFrontApp
      */
-    angular.module('myApp').controller('loginCtrl', function($scope, $rootScope, $location, User) {
+    angular.module('myApp').controller('loginCtrl', function($scope, $rootScope, $location,$window, User) {
         $scope.loginData = {};
         $scope.doLogin = function() {
             if (!($scope.loginData.username && $scope.loginData.password)) {
@@ -33,7 +33,7 @@
                             switch ($rootScope.userData.type) {
                                 case "kdm":
                                     console.log($location);
-                                    return $location.path("/kdm");
+                                    return $window.location.assign("/3003cms/app/#/kdm");
                                 case "operator":
                                     return $location.path("/operator");
                                 default:

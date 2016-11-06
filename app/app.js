@@ -2,6 +2,7 @@ var myApp = angular.module('myApp', [
   'ngRoute',
   'ngCookies',
   'ngAnimate',
+  'ngMaterial',
   'myApp.view1',
   'myApp.view2',
   'angular.filter',
@@ -39,6 +40,29 @@ myApp.controller('publicController', function($scope) {
   $scope.pageClass = 'page-public';
 });
 
+myApp.constant('CONSTANTS', (function() {
+  // Define your variable
+  var user = [[],[],[]];
+  var userdb = {
+    "kdm1":{
+      "admin":"admin",
+      "type": "kdm"
+    },
+
+    "operator1":{
+      "admin":"admin",
+      "type": "operator"
+    }
+  };
+  // Use the variable in your constants
+  return {
+    USERS_DOMAIN: user[0],
+    USERS_NAME: user[1],
+    PASSWORD: user[2],
+    TOKEN : 0,
+    USERDB: userdb
+  }
+})());
 
 /*
 myApp.controller('MainCtrl', function($scope, $rootScope, $location, $routeParams, $uibModal, djangoWebsocket, Incident, Agency, User, localStorageService) {

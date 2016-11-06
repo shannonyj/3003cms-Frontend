@@ -3,19 +3,30 @@
  */
 (function() {
     'use strict';
-    angular.module('myApp').service('User', function($http) {
+    angular.module('myApp').service('User', function($http, CONSTANTS) {
         var getProfile, login, logout;
         login = function(loginData, callback){
             return $http.get('test.json'
                 /*Here should be the communication*/
             ).success((function(data, status, headers, config){
-                    console.log('success');
+                    //CONSTANTS.TOKEN = 1;
+                    //CONSTANTS.USERS_DOMAIN = data[loginData.username].type ;
                     callback(data);
                 })).error((function(data, status, headers, config) {
                     console.log("Login failed");
                     callback(data);
                 }));
 
+        };
+
+        logout = function(){
+            return $http.get('test.json'
+            ).success((function(data,status,headers,config){
+                    console.log("Logout");
+                    CONSTANTS.USERS_DOMAIN = [];
+                    CONSTANTS.TOKEN = 0;
+                    console.log(CONSTANTS.TOKEN);
+                }));
         };
 
         /*
@@ -79,7 +90,7 @@
         };
         */
         getProfile = function(token, callback) {
-            console.log('reach getprofile');
+
             return $http.get('test.json')
                 .success((function(data, status, headers, config) {
                 console.log(data);

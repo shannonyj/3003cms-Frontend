@@ -20,7 +20,8 @@
         Crisis Management System
         <small>Dashboard (Emergency Manager)</small>
     </h1>
-    <md-switch ng-model="data.cb2" aria-label="Switch 2" ng-true-value="'On'" ng-false-value="'Off'" class="md-warn">
+    <md-switch ng-model="data.cb2" aria-label="Switch 2" ng-true-value="'On'" ng-false-value="'Off'" class="md-warn"
+            ng-change="showConfirm($event)">
         Crisis Mode: {{ data.cb2 }}
     </md-switch>
     <!--</ol>-->
@@ -38,7 +39,6 @@
 
 
     </div><!-- /.row (main row) -->
-                </div>
 
 </section><!-- /.content -->
 

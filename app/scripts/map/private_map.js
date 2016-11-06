@@ -43,8 +43,6 @@ $(document).ready(function () {
         var areaId = Number(targetArea.id);
         for (var i = 0; i < mapManager.areaManager.currentAreas.length; i++) {
             if (mapManager.areaManager.currentAreas[i].id == areaId) {
-                console.log(areaId);
-                console.log('found area match');
                 mapManager.areaManager.currentAreas[i].name = $('.crisisReportForm #nameReport').val();
                 mapManager.areaManager.currentAreas[i].description = $('.crisisReportForm #descriptionReport').val();
                 mapManager.areaManager.currentAreas[i].location = $('.crisisReportForm #locationReport').val();
@@ -55,7 +53,8 @@ $(document).ready(function () {
         }
         var serializer = new Serializer();
         var newSerializedArea = serializer.serializeArea(targetArea);
-        console.log({ json: newSerializedArea });
+        console.log(newSerializedArea);
+        
         $.post(rootDjangoUrl + '/submitCrisis/', newSerializedArea, function (data) { });
         $('.crisisReportForm,.overlay').hide();
         $('#toggleEditBtn').click();
@@ -65,7 +64,7 @@ $(document).ready(function () {
         $('.crisisInfoForm .crisisName').text(mapManager.getDisasterName(areaData.disaster));
         $('.crisisInfoForm .location').text(areaData.location);
         $('.crisisInfoForm .name').text(areaData.name);
-        $('.crisisInfoForm .time').text(area.time.format());
+        $('.crisisInfoForm .time').text(areaData.time.format());
         $('.crisisInfoForm .description').text(areaData.description);
         var severity = 2;
         if (areaData.severity != null) severity = areaData.severity;

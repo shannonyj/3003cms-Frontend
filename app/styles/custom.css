@@ -11,6 +11,24 @@
     font-size: 80%;
     overflow: hidden;
     box-shadow: inset 3px 3px 10px #848484;}
+
+          .crisisModeText{
+    position: absolute;
+    right: 3%;
+    display: inline-block;
+    top: 24%;
+    background: #79bc86;
+    font-size: 128%;
+    padding: 5px 41px;
+    color: #fff;
+    box-shadow: inset 3px 3px 5px rgba(255, 255, 255, 0.34);
+    border: 2px solid #38954a;
+    cursor: pointer;
+          }
+.crisisModeText.active {
+    background: #ce3d3d;
+    border: 2px solid #953838;
+}
 .wrapper .main-sidebar{
     border-right: 2px solid #5b5b5b;
     box-shadow: inset 6px 10px 18px rgba(221, 221, 221, 0.21);

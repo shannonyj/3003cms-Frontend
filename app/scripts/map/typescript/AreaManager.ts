@@ -12,7 +12,7 @@ class AreaManager{
     onAreaChangeCallback: any;
     onAreaLoadCallback: any;
     parentMapManager: any;
-    idCount = 1;
+    idCount = 100;
     areaCounter = 1;
     constructor(map:any){
         this.currentMap = map;

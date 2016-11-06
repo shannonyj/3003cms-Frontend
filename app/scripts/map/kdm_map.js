@@ -37,18 +37,18 @@
             area.dispatch.resource = $('.to-do-list-dispatch .resource').val();
             area.dispatch.contact = $('.to-do-list-dispatch .contact').val();
             area.dispatch.time = new Date($('.to-do-list-dispatch .dispatchTime').text());
-            console.log(area.dispatch);
             $('.to-do-list-dispatch .agency option')[0].selected = true;
             $('.to-do-list-dispatch .resource option')[0].selected = true;
             $('.to-do-list-dispatch .contact').val('');
-            $('.to-do-list-dispatch .time').val('');
+            $.post(rootDjangoUrl + '/sendDispatch/' + area.id + '/', JSON.stringify(area.dispatch), function (response) { });
             $('.mapDispatchInfoPopup').show();
         });
         $('#cancelApproveCrisisFormBtn').click(function () {
             $('.crisisApprovalForm,.overlay').hide();
         });
         $('#approveCrisisFormBtn').click(function () {
-            $.get(rootDjangoUrl + '/approveCrisis/' + $('.crisisApprovalForm').data('area').id, function () {
+            console.log('approved');
+            $.get(rootDjangoUrl + '/approveCrisis/' + $('.crisisApprovalForm').data('area').id + '/', function () {
             });
             $('.crisisApprovalForm').data('area').polygon.setMap(null);
             $('.crisisApprovalForm,.overlay').hide();
@@ -58,6 +58,11 @@
         });
         $('.mapType').change(function () {
             loadMapFromUrl(rootDjangoUrl + '/' + $(this).val());
+        });
+        $('.archiveCrisisBtn').click(function () {
+            var area = $(this).data('area');
+            area.polygon.setMap(null);
+            $.get(rootDjangoUrl + '/closeCrisis/' + area.id + '/');
         });
     });
     function loadMap(raw) {
@@ -77,6 +82,8 @@
         }
         mapManager.onAreaSpaceClickCallback = function (area) {
             genericOnAreaSpaceClickCallback(area);
+            $('.archiveCrisisBtn').show();
+            $('.archiveCrisisBtn').data('area', area);
             $('.to-do-list-dispatch .location').text(area.location);
             if (area.approved != null && area.approved) {
                 if (area.dispatch != null) {
@@ -87,6 +94,7 @@
                     $('.dispatchInfoForm .agency').text(area.dispatch.agency);
                     $('.dispatchInfoForm .resource').text(area.dispatch.resource);
                     $('.dispatchInfoForm .contact').text(area.dispatch.contact);
+                    console.log(area.dispatch);
                     $('.dispatchInfoForm .time').text(area.dispatch.time.format());
                 }
                 else {

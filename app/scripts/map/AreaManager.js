@@ -6,7 +6,7 @@
 var AreaManager = (function () {
     function AreaManager(map) {
         this.currentAreas = [];
-        this.idCount = 1;
+        this.idCount = 100;
         this.areaCounter = 1;
         this.currentMap = map;
     }
@@ -49,7 +49,7 @@ var AreaManager = (function () {
         area.id = this.idCount;
         this.currentAreas.push(area);
         var curInst = this;
-        this.idCount++;
+        area.id = this.idCount++;
         this.onAreaChangeCallback((function getArea() {
             for (var i = 0; i < curInst.currentAreas.length; i++) {
                 if (curInst.currentAreas[i].id == area.id) {

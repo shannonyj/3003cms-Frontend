@@ -96,3 +96,7 @@ function loadMapFromUrl(url){
         loadMap(rawJson);
     });
 }
+
+function getCrisisMode(){
+    
+}

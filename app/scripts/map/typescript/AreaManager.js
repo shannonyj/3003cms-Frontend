@@ -6,7 +6,7 @@
 var AreaManager = (function () {
     function AreaManager(map) {
         this.currentAreas = [];
-        this.idCount = 1;
+        this.idCount = 100;
         this.areaCounter = 1;
         this.currentMap = map;
     }

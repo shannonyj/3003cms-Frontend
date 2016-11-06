@@ -741,3 +741,14 @@
     border: 3px solid #52afa0;}
           .public .mapInfoPopup{
     left: 82.2%;}
+          .archiveCrisisBtn{
+    position: absolute;
+    top: 83.4%;
+    color: #fff;
+    left: 34%;
+    background: #dfb41a;
+    padding: 6px 30px;
+    border: 2px solid #cba316;
+    box-shadow: inset 3px 3px 5px rgba(255, 255, 255, 0.31);
+    cursor: pointer;
+          }

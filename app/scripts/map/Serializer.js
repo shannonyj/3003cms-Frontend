@@ -17,6 +17,8 @@ var Serializer = (function () {
             serializableArea['time'] = areaList[i].time;
             serializableArea['location'] = areaList[i].location;
             serializableArea['severity'] = areaList[i].severity;
+            if (area.dispatch)
+                serializableArea['dispatch'] = areaList[i].dispatch;
             serializableAreaList.push(serializableArea);
         }
         return JSON.stringify(serializableAreaList);
@@ -31,6 +33,8 @@ var Serializer = (function () {
         serializableArea['time'] = area.time;
         serializableArea['location'] = area.location;
         serializableArea['severity'] = area.severity;
+        if (area.dispatch)
+            serializableArea['dispatch'] = area.dispatch;
         return JSON.stringify(serializableArea);
     };
     Serializer.prototype.deserializeAreaList = function (raw) {
@@ -48,12 +52,15 @@ var Serializer = (function () {
             ;
             mapArea.location = deserialized[i]['location'];
             mapArea.id = deserialized[i]['id'];
-            console.log(deserialized[i]);
             if (deserialized[i]['approved'])
                 mapArea.approved = deserialized[i]['approved'];
+            if (deserialized[i]['dispatch']) {
+                mapArea.dispatch = deserialized[i]['dispatch'];
+                mapArea.dispatch.time = new Date(mapArea.dispatch.time);
+            }
             areaList.push(mapArea);
         }
         return areaList;
     };
     return Serializer;
-} ());
+}());

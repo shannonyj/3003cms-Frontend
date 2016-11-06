@@ -1,6 +1,41 @@
 <script src="scripts/map/generic_map.js" async defer></script>   
-<script src="scripts/map/private_map.js" async defer></script>
+<script>
+     var mapManager;
+    $(document).ready(function () {
+        setInterval(function () {
+            loadMapFromUrl(rootDjangoUrl + '/getPublicApprovedCrisis/');
+        }, 500);
+        
+        $('.mapInfoPopupInnerWrapper .infoBtn').click(function () {
+            var areaData = $('.mapInfoPopup').data('area');
+            $('.crisisInfoForm .crisisName').text(mapManager.getDisasterName(areaData.disaster));
+            $('.crisisInfoForm .location').text(areaData.location);
+            $('.crisisInfoForm .name').text(areaData.name);
+            $('.crisisInfoForm .time').text(areaData.time.format());
+            $('.crisisInfoForm .description').text(areaData.description);
+            var severity = 2;
+            if (areaData.severity != null) severity = areaData.severity;
+            $('.crisisInfoForm .severity').html(generateSeverityBar(severity));
+            $('.crisisInfoForm,.overlay').show();
+        });
+    });
+    function loadMap(raw) {
+        mapManager.loadMap(raw);
+    }
+    function initMap() {
+        mapManager = new MapManager();
+        mapManager.initializeMap(document.getElementById('map'));
+        mapManager.areaManager.onAreaChangeCallback = function (area) {
+        };
+        mapManager.areaManager.onAreaLoadCallback = function (areas) {
+            $('.crisisReportForm').hide();
+        }
+        mapManager.onAreaSpaceClickCallback = function (area) {
+            genericOnAreaSpaceClickCallback(area);
+        };
 
+    }
+</script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap&libraries=places" async defer></script>
     
 <div class="mapWrapper">

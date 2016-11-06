@@ -1,3 +1,28 @@
+<script>
+    $(document).ready(function () {
+        $.get(rootDjangoUrl + '/getCrisisMode/', function (response) {
+            if (response == 'True') {
+                $('.crisisModeText').addClass('active').text('Crisis mode: On');
+            }
+            else {
+                $('.crisisModeText').text('Crisis mode: Off');
+            }
+        });
+        $('.crisisModeText').click(function () {
+            if ($(this).hasClass('active')) {
+                $('.crisisModeText').text('Crisis mode: Off');
+                $.get(rootDjangoUrl + '/toggleCrisisModeOff/');
+            }
+            else {
+                $('.crisisModeText').text('Crisis mode: On');
+                $.get(rootDjangoUrl + '/toggleCrisisModeOn/');
+            }
+            $(this).toggleClass('active');
+        });
+    });
+
+</script>
+
 <div class="wrapper">
     <div class="overlay"></div>
     <div>
@@ -20,24 +45,14 @@
         Crisis Management System
         <small>Dashboard (Emergency Manager)</small>
     </h1>
-    <span>Crisis mode: On</span>
+    <span class="crisisModeText">Crisis mode: </span>
     <!--</ol>-->
 </section>
 <!-- Main content -->
 <section class="content">
-
-    <!-- Info boxes -->
-    <div class="row statusWrapper " ng-include="'view2/header_status.html'">
-    </div><!-- /.row -->
-    
-            <div class="map kdm" ng-include="'view2/kdm_map.html'">
-    <!-- Main row -->
-    <div class="row">
-
-
-    </div><!-- /.row (main row) -->
-
-</section><!-- /.content -->
+    <div class="row statusWrapper " ng-include="'view2/header_status.html'"></div>
+    <div class="map kdm" ng-include="'view2/kdm_map.html'"></div>
+</section>
 
 <script src="scripts/controllers/js/timeline.js"></script>
 <script src="scripts/controllers/js/incident-modal.js"></script>

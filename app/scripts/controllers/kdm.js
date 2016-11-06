@@ -11,7 +11,7 @@
      * # AboutCtrl
      * Controller of the tbcCmsFrontApp
      */
-    angular.module('myApp').controller('kdmCtrl', function ($scope, $rootScope, $uibModal) {
+    angular.module('myApp').controller('kdmCtrl', function ($scope, $rootScope, $uibModal, $mdDialog) {
         $scope.currentPage = 0;
         $scope.pageSize = 20;
         $scope.goPage = function (n) {
@@ -69,6 +69,13 @@
                 "todoType": "dispatch"
             }];
 
+        $scope.data = {
+            cb1: true
+        };
+        $scope.message = 'false';
+        $scope.onChange = function(cbState) {
+            $scope.message = cbState;
+        };
 
         $scope.init = function(){
             var token;

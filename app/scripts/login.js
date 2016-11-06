@@ -11,8 +11,9 @@
      * # AboutCtrl
      * Controller of the tbcCmsFrontApp
      */
-    angular.module('myApp').controller('loginCtrl', function($scope, $rootScope, $location,$window, User) {
+    angular.module('myApp').controller('loginCtrl', function($scope,$http, $rootScope, $location,$window, User, CONSTANTS) {
         $scope.loginData = {};
+        $scope.token01 = CONSTANTS;
         $scope.doLogin = function() {
             if (!($scope.loginData.username && $scope.loginData.password)) {
                 $scope.errorMsg = "Form Incomplete";
@@ -20,17 +21,20 @@
             }
             return User.login($scope.loginData, function(data) {
                 var token;
+                var userdb = angular.fromJson($http.get('test.json'));
                 /*Pass a validation var here*/
-                if (1) {
+                var validation = $scope.loginData.username in CONSTANTS.USERDB;
+                console.log(validation);
+                if (validation) {
                     //token = data.token_type + ' ' + data.access_token;
                     $scope.errorMsg = "";
                     $scope.successMsg = "Login Success";
                     User.getProfile(token, function(data) {
                         $rootScope.userData = data;
-                        console.log(data.type);
+                        console.log(data);
                         //$rootScope.userData.token = token;
                         if (1) {
-                            switch ($rootScope.userData.type) {
+                            switch (data[$scope.loginData.username].type) {
                                 case "kdm":
                                     return $window.location.assign("/3003cms/app/#/kdm");
                                 case "operator":
@@ -48,6 +52,10 @@
                     $scope.errorMsg = "Invalid Credentials";
                 }
             });
+        };
+
+        $scope.doLogout = function(){
+            return User.logout();
         };
     });
 

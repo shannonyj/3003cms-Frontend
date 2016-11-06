@@ -24,9 +24,9 @@
 
     <p ng-show="item.description" class="timeline-item-detail-content">{{item.description}}</p>
     <div style="clear: both;"></div>
-    <div style="padding-left: 50em;">
-                <a href="#" class="myButton1">Post on Facebook</a>
-                <a href="#" class="myButton">Post on Twitter</a>
-            </div>
+    <div style="padding-left: 60em;" ng-controller="timelineCtrl">
+                <a class="myButton1" ng-click="showAdvancedFb($event)">Post on Facebook</a>
+                <a class="myButton" ng-click="showAdvancedTwitter($event)">Post on Twitter</a>
+    </div>
 </div>
 <div class="timeline-footer"></div>

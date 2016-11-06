@@ -28,7 +28,6 @@ function initNEAAPI($scope) {
                     weather.text("Unfortunately, weather forecast is currently unavailable.");
                 }
             });
-            console.log('why');
             $.ajax({
                 type: 'GET',
                 dataType: "xml",

@@ -30,6 +30,8 @@
                     $scope.errorMsg = "";
                     $scope.successMsg = "Login Success";
                     User.getProfile(token, function(data) {
+                        CONSTANTS.TOKEN = 1;
+                        CONSTANTS.USERS_DOMAIN = data[$scope.loginData.username].type ;
                         $rootScope.userData = data;
                         console.log(data);
                         //$rootScope.userData.token = token;

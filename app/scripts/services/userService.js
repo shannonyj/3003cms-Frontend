@@ -9,8 +9,8 @@
             return $http.get('test.json'
                 /*Here should be the communication*/
             ).success((function(data, status, headers, config){
-                    CONSTANTS.TOKEN = 1;
-                    CONSTANTS.USERS_DOMAIN = data['type'] ;
+                    //CONSTANTS.TOKEN = 1;
+                    //CONSTANTS.USERS_DOMAIN = data[loginData.username].type ;
                     callback(data);
                 })).error((function(data, status, headers, config) {
                     console.log("Login failed");

@@ -124,8 +124,8 @@
             <li ng-class="{ active: isActive('/kdm') }" ng-show="$root.userData.concreteuser.type=='kdm'"><a href="#/kdm"><i class="fa fa-circle-o text-yellow"></i> KDM Dashboard</a></li>
             <li ng-class="{ active: isActive('/public') }"><a href="#/public"><i class="fa fa-circle-o text-aqua"></i> Public Dashboard</a></li>
             -->
-            <li ng-class="{ active: isActive('/') }" ><a href="#/operator"><i class="fa fa-circle-o text-red"></i> Operator Dashboard</a></li>
-            <li ng-class="{ active: isActive('/kdm') }" ><a href="#/kdm"><i class="fa fa-circle-o text-yellow"></i> KDM Dashboard</a></li>
+            <li ng-if="token01.USERS_DOMAIN == 'operator'"><a href="#/operator"><i class="fa fa-circle-o text-red"></i> Operator Dashboard</a></li>
+            <li ng-if="token01.USERS_DOMAIN == 'kdm'"><a href="#/kdm"><i class="fa fa-circle-o text-yellow"></i> KDM Dashboard</a></li>
             <li ng-class="{ active: isActive('/public') }"><a href="#/public"><i class="fa fa-circle-o text-aqua"></i> Public Dashboard</a></li>
           </ul>
         </li>

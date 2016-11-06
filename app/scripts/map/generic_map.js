@@ -1,3 +1,5 @@
+var rootDjangoUrl = 'http://127.0.0.1:8000';
+
 $(document).ready(function () {
     setTimeout(function () { 
     var searchBox = new google.maps.places.SearchBox($('#pac-input')[0]);
@@ -84,5 +86,13 @@ function goToLocation(location){
                 }
             }, 100);
         }, 500);
+    });
+}
+
+function loadMapFromUrl(url){
+    mapManager.clearMap();
+    $('.mapInfoPopupTypes').hide();
+    $.get(url, function (rawJson) {
+        loadMap(rawJson);
     });
 }

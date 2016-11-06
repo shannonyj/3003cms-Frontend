@@ -532,7 +532,7 @@
     position: fixed;
     top: 1%;
     left: 37%;
-    z-index: 1000;
+    z-index: 100000;
     display: none;
           }
           .kdm .mapInfoPopup{

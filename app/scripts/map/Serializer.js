@@ -44,9 +44,16 @@ var Serializer = (function () {
             mapArea.name = deserialized[i]['name'];
             mapArea.description = deserialized[i]['description'];
             mapArea.time = new Date(deserialized[i]['time']);
+            mapArea.severity = Number(deserialized[i]['severity']);
+            ;
+            mapArea.location = deserialized[i]['location'];
+            mapArea.id = deserialized[i]['id'];
+            console.log(deserialized[i]);
+            if (deserialized[i]['approved'])
+                mapArea.approved = deserialized[i]['approved'];
             areaList.push(mapArea);
         }
         return areaList;
     };
     return Serializer;
-}());
+} ());

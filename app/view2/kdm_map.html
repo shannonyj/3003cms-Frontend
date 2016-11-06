@@ -1,126 +1,5 @@
-<script>
-    var mapManager;
-    $(document).ready(function () {
-        $('.to-do-list-dispatch .close,#approve-dispatch-cancel').click(function () {
-            $('.to-do-list-dispatch,.overlay').hide();
-        });
-        setTimeout(function () {
-            mapManager.clearMap();
-            //Input url here************* Uncomment below
-            /*$.get('', function (rawJson) {
-            loadMap(rawJson);
-            }); */
-            //Sample load data
-            loadMap(JSON.stringify([{ "coordinates": [{ "lat": 1.397562659547266, "lng": 103.70304107666016 }, { "lat": 1.40374062266067, "lng": 103.7270736694336 }, { "lat": 1.3447060959795738, "lng": 103.7160873413086}], "disaster": "Zombie", "type": "Polygon", "name": "Area1", "time": "2016-10-25T17:41:11.176Z" }, { "coordinates": [{ "lat": 1.4215879797063258, "lng": 103.73531341552734 }, { "lat": 1.4229608476328477, "lng": 103.7710189819336 }, { "lat": 1.3117559678296862, "lng": 103.7710189819336 }, { "lat": 1.318620614005517, "lng": 103.74149322509766}], "disaster": "Terminator", "type": "Polygon", "name": "Area2", "time": "2016-10-25T17:41:15.876Z" }, { "coordinates": [{ "lat": 1.3804015658498483, "lng": 103.80741119384766 }, { "lat": 1.3762828848738569, "lng": 103.9200210571289 }, { "lat": 1.3694184007839654, "lng": 103.86165618896484}], "disaster": "Fire", "type": "Polygon", "name": "Area3", "time": "2016-10-25T17:41:23.126Z" }, { "coordinates": [{ "lat": 1.4174693710318358, "lng": 103.87813568115234}], "disaster": "Safehouse", "type": "Point", "name": "Point4", "time": "2016-10-25T17:41:25.872Z" }, { "coordinates": [{ "lat": 1.3042048352878455, "lng": 103.87676239013672}], "disaster": "Safehouse", "type": "Point", "name": "Point6", "time": "2016-10-25T17:41:26.956Z" }, { "coordinates": [{ "lat": 1.3213664671805336, "lng": 103.6831283569336}], "disaster": "Safehouse", "type": "Point", "name": "Point7", "time": "2016-10-25T17:41:27.804Z"}]));
-        }, 500);
 
-        $('.mapInfoPopupInnerWrapper .infoBtn').click(function () {
-            var areaData = $('.mapInfoPopup').data('area');
-            $('.crisisInfoForm .crisisName').text(mapManager.getDisasterName(areaData.disaster));
-            $('.crisisInfoForm .location').text(areaData.location);
-            $('.crisisInfoForm .name').text(areaData.name);
-            $('.crisisInfoForm .time').text(new Date().toTimeString());
-            $('.crisisInfoForm .description').text(areaData.description);
-            var severity = 2;
-            if (areaData.severity != null) severity = areaData.severity;
-            $('.crisisInfoForm .severity').html(generateSeverityBar(severity));
-            $('.crisisInfoForm,.overlay').show();
-        });
-        $('#hideDispatchFormBtn').click(function () {
-            $('.dispatchInfoForm,.overlay').hide();
-        });
-        $('.mapDispatchInfoPopup').click(function () {
-            $('.dispatchInfoForm,.overlay').show();
-        });
-        $('.createMapDispatchInfoPopup').click(function () {
-            loadCreateDispatchForm($(this).data('area'));
-        });
-        $('#approve-dispatch').click(function () {
-            $('.to-do-list-dispatch,.overlay,.createMapDispatchInfoPopup').hide();
-            var area = $('.createMapDispatchInfoPopup').data('area');
-            area.dispatch = {};
-            area.dispatch.agency = $('.to-do-list-dispatch .agency').val();
-            area.dispatch.resource = $('.to-do-list-dispatch .resource').val();
-            area.dispatch.contact = $('.to-do-list-dispatch .contact').val();
-            $('.to-do-list-dispatch .agency option')[0].selected = true;
-            $('.to-do-list-dispatch .resource option')[0].selected = true;
-            $('.to-do-list-dispatch .contact').val('');
-            $('.to-do-list-dispatch .time').val('');
-            $('.mapDispatchInfoPopup').show();
-        });
-        $('#cancelApproveCrisisFormBtn').click(function () {
-            $('.crisisApprovalForm,.overlay').hide();
-        });
-        $('#approveCrisisFormBtn').click(function () {
-            $('.crisisApprovalForm,.overlay').hide();
-        });
-        $('.mapApproveInfoPopup').click(function () {
-            loadApprovalForm($(this).data('area'));
-        });
-    });
-    function loadMap(raw) {
-        mapManager.loadMap(raw);
-    }
-    function initMap() {
-        mapManager = new MapManager();
-        mapManager.initializeMap(document.getElementById('map'));
-        mapManager.areaManager.onAreaChangeCallback = function (area) {
-            createNewAreaItem(area);
-        };
-        mapManager.areaManager.onAreaLoadCallback = function (areas) {
-            for (var i = 0; i < areas.length; i++) {
-                createNewAreaItem(areas[i]);
-            }
-            $('.crisisReportForm').hide();
-        }
-        mapManager.onAreaSpaceClickCallback = function (area) {
-            genericOnAreaSpaceClickCallback(area);
-            $('.to-do-list-dispatch .location').text(area.location);
-            if (area.approve != null && area.approve) {
-                if (area.dispatch != null) {
-                    $('.mapDispatchInfoPopup').show();
-                    $('.createMapDispatchInfoPopup').hide();
-                    $('.mapApproveInfoPopup').hide();
-                    $('.dispatchInfoForm .agency').text(area.dispatch.agency);
-                    $('.dispatchInfoForm .resource').text(area.dispatch.resource);
-                    $('.dispatchInfoForm .contact').text(area.dispatch.contact);
-                }
-                else {
-                    $('.createMapDispatchInfoPopup').show().data('area', area);
-                    $('.mapDispatchInfoPopup').hide();
-                    $('.mapApproveInfoPopup').hide();
-                }
-            }
-            else {
-                $('.mapApproveInfoPopup').show().data('area', area);
-                $('.mapDispatchInfoPopup').hide();
-                $('.createMapDispatchInfoPopup').hide();
-            }
-        };
-
-    }
-    function loadApprovalForm(area) {
-        
-        $('.crisisApprovalForm .disasterType').text(mapManager.getDisasterName(area.disaster));
-        $('.crisisApprovalForm .location').text(area.location);
-        $('.crisisApprovalForm .time').text(new Date().toTimeString());
-        $('.crisisApprovalForm .description').text(area.description);
-        var severity = 2;
-        if (area.severity != null) severity = area.severity;
-        $('.crisisApprovalForm .severity').html(generateSeverityBar(severity));
-        $('.crisisApprovalForm,.overlay').show();
-    }
-    function loadCreateDispatchForm(area) {
-        $('.to-do-list-dispatch .disasterType').text(mapManager.getDisasterName(area.disaster));
-        $('.to-do-list-dispatch .location').text(area.location);
-        $('.to-do-list-dispatch .time').text(new Date().toTimeString());
-        $('.to-do-list-dispatch .description').text(area.description);
-        var severity = 2;
-        if (area.severity != null) severity = area.severity;
-        $('.to-do-list-dispatch .severity').html(generateSeverityBar(severity));
-        $('.to-do-list-dispatch,.overlay').show();
-    }
-</script>
+<script src="scripts/map/kdm_map.js" async defer></script>  
 <script src="scripts/map/generic_map.js" async defer></script>  
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap&libraries=places" async defer></script>
     
@@ -132,10 +11,10 @@
         <div class="verticalOptions">
             <div class="typeWrapper" style="    margin-bottom: -11px;">
              <span class="typeLabel">Type</span>
-            <select class="disasterType">
-                <option>Crisis map</option>
-                <option>Reporting map</option>
-                <option>Public map</option>
+            <select class="mapType">
+                <option value="getApprovedCrisis/">Crisis map</option>
+                <option value="getUnapprovedCrisis/">Reporting map</option>
+                <option value="getApprovedCrisis/">Public map</option>
             </select></div>
         </div>
                 <div class="todoListBox"><div class="box-header">
@@ -166,7 +45,7 @@
                     <div class="crisisLabel">Approval</span></div>
                         </div>
                 </div>
-                <div class="mapInfoPopup">
+                <div class="mapInfoPopup mapInfoPopupTypes">
                     <div class="mapInfoPopupInnerWrapper">
                     <div class="crisisLabel"><span class="crisisName">Thunderstorm at NTU</span><span class="infoBtn">?</span><br><span class="crisisType"></span></div>
                         
@@ -224,7 +103,9 @@
             </div>
             <div class="event-detail event-time">
                 <span class="event-title">Time:</span>
-                <input type="text" class="time">
+                <span class="dispatchTime" style="
+    display: block;
+    text-align: left;"></span>
             </div>
             <div class="event-detail event-contact">
                 <span class="event-title">Contact:</span>
@@ -251,12 +132,14 @@
     <span class="infoWrapper agency">Police force</span>
     <span class="formLabel">Resource:</span>
     <span class="infoWrapper resource">A few police cars</span>
+    <span class="formLabel">Time:</span>
+    <span class="infoWrapper time"></span>
     <span class="formLabel">Contact:</span>
     <span class="infoWrapper contact">+65 97321432 (Mr James, Police Officer)</span><br>
     <div style="text-align: center;margin-top: 10px;"><span id="hideDispatchFormBtn" >Close</span></div></div>
 
 <div class="crisisApprovalForm">
-    <h1>Zombie crisis approval</h1>
+    <h1><span class="disaster"></span> crisis approval</h1>
     <span class="formLabel">Location:</span>
     <span class="location"></span>
     <span class="formLabel">Name:</span>

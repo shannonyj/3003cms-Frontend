@@ -1,13 +1,13 @@
 <script src="scripts/map/generic_map.js" async defer></script>   
 <script src="scripts/map/private_map.js" async defer></script>
     
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap&libraries=places" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap&libraries=places" async defer></script>
     
 <div class="mapWrapper operator">
             <div class="innerMapWrapper">
                 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
             <div id="map"></div>
-                <div class="mapInfoPopup">
+                <div class="mapInfoPopup mapInfoPopupTypes">
                     <div class="mapInfoPopupInnerWrapper">
                     <div class="crisisLabel"><span class="crisisName">Thunderstorm at NTU</span><span class="infoBtn">?</span><br><span class="crisisType"></span></div>
                         
@@ -25,10 +25,10 @@
         <div class="verticalOptions">
             <div class="typeWrapper">
              <span class="typeLabel">Type</span>
-            <select class="disasterType">
-                <option>Crisis map</option>
-                <option>Reporting map</option>
-                <option>Public map</option>
+            <select class="mapType">
+                <option value="getUnapprovedCrisis/">Reporting map</option>
+                <option value="getApprovedCrisis/">Crisis map</option>
+                <option value="getApprovedCrisis/">Public map</option>
             </select></div>
             <ul class="areaList">
                 <li class="zombie active" disasterType="Zombie"><img src="images/zombieicon.png" class="icon">Zombie</li>

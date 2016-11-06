@@ -299,6 +299,15 @@
 .loadList li:active {
     background: #ccc;
 }
+          .operator #pac-input{
+    position: absolute;
+    z-index: 10;
+    width: 15%;
+    height: 29px;
+    padding-left: 7px;
+    left: 14%;
+    top: 10.5%;
+    border: 3px solid #52afa0;}
           .mapInfoPopup{
     position: absolute;
     display: inline-block;
@@ -638,3 +647,97 @@
     display: block;
     color: #000;
           }
+          .kdm #cancelApproveCrisisFormBtn{
+    background: #af3b3b;
+    border: 1px solid #de5151;
+    display: inline-block;
+    padding: 5px 21px;
+    margin-right: 11px;
+    cursor: pointer;
+          }
+          .kdm #approveCrisisFormBtn{
+    background: #af3b3b;
+    border: 1px solid #de5151;
+    display: inline-block;
+    padding: 5px 21px;
+    cursor: pointer;
+          }
+          .crisisApprovalForm {
+    position: fixed;
+    top: 9%;
+    left: 40%;
+    background: #e25b5b;
+    padding: 25px;
+    width: 500px;
+    color: #fff;
+    z-index: 1000;
+    display: none;
+          }
+          .crisisApprovalForm .formLabel{
+              display: block;
+              font-weight: 600;
+              margin: 10px 0;
+          }
+          .crisisApprovalForm h1{
+    font-size: 144%;
+    margin-top: 0;
+    padding: 20px;
+    background: #ce5656;
+    margin: -16px;
+    margin-bottom: 12px;}
+.kdm .mapApproveInfoPopup {
+    position: absolute;
+    background: #d03535;
+    border: 2px solid #d03f3f;
+    padding: 4px;
+    box-sizing: border-box;
+    box-shadow: inset 1px 1px 3px rgba(249, 249, 249, 0.47);
+    display: block;
+    font-size: 100%;
+    width: 139px;
+    height: 35px;
+    margin-left: 0px;
+    top: 29.5%;
+    left: 85%;
+    cursor: pointer;
+    display: none;
+}
+          .kdm .mapApprovePopupInnerWrapper{
+    width: 100%;
+    background: #cc3131;
+    border: 1px solid #e05353;
+    height: 100%;
+    color: #fff;
+    font-size: 96%;
+    line-height: 148%;
+          }
+          .kdm .crisisApprovalForm .severityBar .radio .innerRadio {
+    width: 5px;
+    margin-top: -11px;
+    margin-left: 3px;
+}
+          .kdm #pac-input{
+    position: absolute;
+    z-index: 10;
+    width: 15%;
+    height: 29px;
+    padding-left: 7px;
+    left: 35%;
+    top: 11.5%;
+    border: 3px solid #52afa0;}
+          
+          .public{}
+          .public #map{
+    height: 500px;
+    width: 100%;}
+          .public #pac-input{
+    position: absolute;
+    z-index: 10;
+    width: 22%;
+    height: 33px;
+    padding-left: 7px;
+    left: 11%;
+    top: 9.5%;
+    border: 3px solid #52afa0;}
+          .public .mapInfoPopup{
+    left: 82.2%;}

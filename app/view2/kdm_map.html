@@ -46,7 +46,16 @@
             $('.to-do-list-dispatch .resource option')[0].selected = true;
             $('.to-do-list-dispatch .contact').val('');
             $('.to-do-list-dispatch .time').val('');
-                $('.mapDispatchInfoPopup').show();
+            $('.mapDispatchInfoPopup').show();
+        });
+        $('#cancelApproveCrisisFormBtn').click(function () {
+            $('.crisisApprovalForm,.overlay').hide();
+        });
+        $('#approveCrisisFormBtn').click(function () {
+            $('.crisisApprovalForm,.overlay').hide();
+        });
+        $('.mapApproveInfoPopup').click(function () {
+            loadApprovalForm($(this).data('area'));
         });
     });
     function loadMap(raw) {
@@ -67,19 +76,39 @@
         mapManager.onAreaSpaceClickCallback = function (area) {
             genericOnAreaSpaceClickCallback(area);
             $('.to-do-list-dispatch .location').text(area.location);
-            if (area.dispatch != null) {
-                $('.mapDispatchInfoPopup').show();
-                $('.createMapDispatchInfoPopup').hide();
-                $('.dispatchInfoForm .agency').text(area.dispatch.agency);
-                $('.dispatchInfoForm .resource').text(area.dispatch.resource);
-                $('.dispatchInfoForm .contact').text(area.dispatch.contact);
+            if (area.approve != null && area.approve) {
+                if (area.dispatch != null) {
+                    $('.mapDispatchInfoPopup').show();
+                    $('.createMapDispatchInfoPopup').hide();
+                    $('.mapApproveInfoPopup').hide();
+                    $('.dispatchInfoForm .agency').text(area.dispatch.agency);
+                    $('.dispatchInfoForm .resource').text(area.dispatch.resource);
+                    $('.dispatchInfoForm .contact').text(area.dispatch.contact);
+                }
+                else {
+                    $('.createMapDispatchInfoPopup').show().data('area', area);
+                    $('.mapDispatchInfoPopup').hide();
+                    $('.mapApproveInfoPopup').hide();
+                }
             }
             else {
-                $('.createMapDispatchInfoPopup').show().data('area', area);
+                $('.mapApproveInfoPopup').show().data('area', area);
                 $('.mapDispatchInfoPopup').hide();
+                $('.createMapDispatchInfoPopup').hide();
             }
         };
 
+    }
+    function loadApprovalForm(area) {
+        
+        $('.crisisApprovalForm .disasterType').text(mapManager.getDisasterName(area.disaster));
+        $('.crisisApprovalForm .location').text(area.location);
+        $('.crisisApprovalForm .time').text(new Date().toTimeString());
+        $('.crisisApprovalForm .description').text(area.description);
+        var severity = 2;
+        if (area.severity != null) severity = area.severity;
+        $('.crisisApprovalForm .severity').html(generateSeverityBar(severity));
+        $('.crisisApprovalForm,.overlay').show();
     }
     function loadCreateDispatchForm(area) {
         $('.to-do-list-dispatch .disasterType').text(mapManager.getDisasterName(area.disaster));
@@ -93,11 +122,12 @@
     }
 </script>
 <script src="scripts/map/generic_map.js" async defer></script>  
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap&libraries=places" async defer></script>
     
 <div class="mapWrapper">
             <div class="innerMapWrapper">
                 
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
             <div class="verticalOptionsWrapper">
         <div class="verticalOptions">
             <div class="typeWrapper" style="    margin-bottom: -11px;">
@@ -110,12 +140,12 @@
         </div>
                 <div class="todoListBox"><div class="box-header">
                     <i class="ion ion-clipboard"></i>
-                    <h3 class="box-title">Events</h3>
+                    <h3 class="box-title">Pending Events</h3>
                     <ul class="items">
                         <li><span class="handle-disabled">
                         <i class="fa fa-ellipsis-v"></i>
                         <i class="fa fa-ellipsis-v"></i>
-                      </span><span><>: Dispatch Requires Approval</span>
+                      </span><span>&lt;Zombie at NTU>: Dispatch</span>
                             <small class="label label label-primary ng-scope"><i class="fa fa-clock-o"></i> <span am-time-ago="todo.time"></span></small>
                         </li>
                     </ul>
@@ -129,6 +159,11 @@
                 <div class="mapDispatchInfoPopup mapInfoPopupTypes">
                     <div class="mapDispatchInfoPopupInnerWrapper">
                     <div class="crisisLabel">Dispatch status</span></div>
+                        </div>
+                </div>
+                <div class="mapApproveInfoPopup mapInfoPopupTypes">
+                    <div class="mapApprovePopupInnerWrapper">
+                    <div class="crisisLabel">Approval</span></div>
                         </div>
                 </div>
                 <div class="mapInfoPopup">
@@ -219,3 +254,19 @@
     <span class="formLabel">Contact:</span>
     <span class="infoWrapper contact">+65 97321432 (Mr James, Police Officer)</span><br>
     <div style="text-align: center;margin-top: 10px;"><span id="hideDispatchFormBtn" >Close</span></div></div>
+
+<div class="crisisApprovalForm">
+    <h1>Zombie crisis approval</h1>
+    <span class="formLabel">Location:</span>
+    <span class="location"></span>
+    <span class="formLabel">Name:</span>
+    <span class="name"></span>
+    <span class="formLabel">Time:</span>
+    <span class="time"></span>
+    <span class="formLabel">Severity:</span>
+    <span class="severity"></span>
+    <span class="formLabel">Description:</span>
+    <span class="description"></span><br>
+    <div style="text-align: center;margin-top: 10px;"><span id="cancelApproveCrisisFormBtn" >Cancel</span><span id="approveCrisisFormBtn" >Approve</span></div>
+    
+</div>

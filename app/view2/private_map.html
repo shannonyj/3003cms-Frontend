@@ -1,10 +1,11 @@
 <script src="scripts/map/generic_map.js" async defer></script>   
 <script src="scripts/map/private_map.js" async defer></script>
     
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap" async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCanXJuqR9G83t3TPpOBySHq-4gx2_7DUA&callback=initMap&libraries=places" async defer></script>
     
-<div class="mapWrapper">
+<div class="mapWrapper operator">
             <div class="innerMapWrapper">
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
             <div id="map"></div>
                 <div class="mapInfoPopup">
                     <div class="mapInfoPopupInnerWrapper">

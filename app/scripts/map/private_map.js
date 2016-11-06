@@ -78,6 +78,9 @@ $(document).ready(function () {
         $('.crisisInfoForm .severity').html(generateSeverityBar(severity));
         $('.crisisInfoForm,.overlay').show();
     });
+    setTimeout(function () {
+        new google.maps.places.SearchBox($('#locationReport')[0]);
+    }, 500);
 });
 function initMap() {
     mapManager = new MapManager();

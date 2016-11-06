@@ -1,3 +1,10 @@
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            mapManager.currentMap.setZoom(12);
+        }, 200);
+    });
+</script>
 <div class="wrapper">
     <div>
         <header class="main-header">
@@ -22,13 +29,14 @@
     <!--</ol>-->
 </section>
 
-<section class="content">
+<section class="content public">
 
     <!-- Info boxes -->
-    <div class="row" ng-include="'view2/header_status.html'">
+    <div class="row statusWrapper" ng-include="'view2/header_status.html'">
 
     </div><!-- /.row -->
-
+    
+    <div class="map" ng-include="'view2/public_map.html'"></div>
     <div class="row">
         <div class="col-md-12">
             <!--

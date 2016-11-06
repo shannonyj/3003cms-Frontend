@@ -3,8 +3,10 @@
         <span class="info-box-icon bg-aqua"><img src="images/current-crisis-i.png"> </span>
         <div class="info-box-content">
             <span class="info-box-text">Current Crises</span>
-            <span class="info-box-number crisis" ng-show="isActive('/public')">{{approvedIncidents}}</span>
+            <span class="info-box-number crisis">{{approvedIncidents}}</span>
+            <!--
             <span class="info-box-number crisis" ng-hide="isActive('/public')">{{$root.pushes.incidents.length?$root.pushes.incidents.length:"0"}}</span>
+            -->
         </div><!-- /.info-box-content -->
     </div><!-- /.info-box -->
 </div><!-- /.col -->

@@ -32,16 +32,15 @@
                         if (1) {
                             switch ($rootScope.userData.type) {
                                 case "kdm":
-                                    console.log($location);
                                     return $window.location.assign("/3003cms/app/#/kdm");
                                 case "operator":
-                                    return $location.path("/operator");
+                                    return $window.location.assign("/3003cms/app/#/operator");
                                 default:
-                                    return $location.path("/public");
+                                    return $window.location.assign("/3003cms/app/#/public");
                             }
                         } else {
                             console.log('this is wrong');
-                            return $location.path("/login");
+                            return $window.location.assign("/login");
                         }
                     });
                     return;

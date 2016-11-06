@@ -3,6 +3,7 @@ function initIncidentModalIncident($scope) {
     var mmt = moment(timeStr, "YYYY-MM-DDThh:mm:ssZ");
     $scope.incident.formattedTime = mmt.format("DD/MM/YYYY hh:mm");
 
+
     setTimeout(function() {
       /*  var ichecks = $('div#event-severity-check input[type="checkbox"].flat-yellow, input[type="radio"].flat-yellow');
         ichecks.iCheck({
@@ -12,6 +13,7 @@ function initIncidentModalIncident($scope) {
         }); */
 
     }, 200);
+
 
     var archiveButton = $('div.to-do-list-incident button#archive-incident');
     var archiveConfirmButton = $('div.to-do-list-incident button#archive-incident-confirm').hide();

@@ -15,7 +15,13 @@ angular.module('myApp').controller('PublicCtrl', function ($scope, $rootScope, $
         $scope.NEAAPIInitialized = true;
     }
     $timeout(function () {
-        $scope.timeline = mapManager.areaManager.currentAreas;
+      $scope.timeline = [{"id":243,"inciupdate_set":[98,99],"dispatch_set":[149],"name":"Fire in NTU Chemistry Lab",
+        "status":"approved","severity":2,"time":"2015-11-11T12:54:00Z","location":"Nanyang Technological University Singapore",
+        "longitude":"103.681697035968","latitude":"1.3435905146060658",
+        "contact_name":"Unknown","contact":"+6584393467","type":"fire",
+        "description":"The fire is very fierce!","todoType":"incident","timelineType":"incident","date":"11 Nov. 2015",
+        "displayTime":"20:54","displayType":"Fire"}];
+        //$scope.timeline = mapManager.areaManager.currentAreas;
         $scope.approvedIncidents = $scope.timeline.length;
     }, 2000);
     initTimeline($scope);

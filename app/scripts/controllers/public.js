@@ -8,22 +8,33 @@
     * Controller of the tbcCmsFrontApp
    */
 
-  angular.module('myApp').controller('PublicCtrl', function($scope, $rootScope, $timeout, CONSTANTS) {
+angular.module('myApp').controller('PublicCtrl', function ($scope, $rootScope, $timeout, CONSTANTS) {
     initTimeline($scope);
     if (!$scope.NEAAPIInitialized) {
-      initNEAAPI($scope);
-      $scope.NEAAPIInitialized = true;
+        initNEAAPI($scope);
+        $scope.NEAAPIInitialized = true;
     }
     $timeout(function () {
-      $scope.timeline = mapManager.areaManager.currentAreas;
-      $scope.approvedIncidents = $scope.timeline.length;
+        $scope.timeline = mapManager.areaManager.currentAreas;
+        $scope.approvedIncidents = $scope.timeline.length;
     }, 2000);
     initTimeline($scope);
     if (!$scope.NEAAPIInitialized) {
-      initNEAAPI($scope);
-      $scope.NEAAPIInitialized = true;
+        initNEAAPI($scope);
+        $scope.NEAAPIInitialized = true;
     }
-  });
+    $scope.latestCrisisOnLoad = function () {
+        console.log('called');
+        $('.timeline li .timeline-item').click(function () {
+            if ($(this).hasClass('unexpandedTimelineItem')) {
+                $(this).removeClass('unexpandedTimelineItem', 500);
+            }
+            else {
+                $(this).addClass('unexpandedTimelineItem', 350);
+            }
+        });
+    };
+});
   /*
   angular.module('myApp').controller('TestCtrl', function($scope, $rootScope, $mdDialog, CONSTANTS) {
     //temp value

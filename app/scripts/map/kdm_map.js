@@ -8,7 +8,7 @@
         setTimeout(function () {
             loadMapFromUrl(rootDjangoUrl + '/' + $('.mapType').val());
         }, 500);
-        setTimeout(function () { 
+        setTimeout(function () {
             loadToDoList();
         }, 1000);
         $('.mapInfoPopupInnerWrapper .infoBtn').click(function () {
@@ -50,8 +50,7 @@
             $('.crisisApprovalForm,.overlay').hide();
         });
         $('#approveCrisisFormBtn').click(function () {
-            $.get(rootDjangoUrl + '/approveCrisis/' + $('.crisisApprovalForm').data('area').id + '/', function () {
-            });
+            crisisController.approveCrisis($('.crisisApprovalForm').data('area').id);
             $('.crisisApprovalForm').data('area').polygon.setMap(null);
             $('.crisisApprovalForm,.overlay').hide();
         });
@@ -60,7 +59,7 @@
         });
         $('.mapType').change(function () {
             loadMapFromUrl(rootDjangoUrl + '/' + $(this).val());
-            setTimeout(function () { 
+            setTimeout(function () {
                 loadToDoList();
             }, 500);
         });

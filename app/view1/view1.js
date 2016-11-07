@@ -15,7 +15,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
       .when('/kdm',{
           templateUrl:'view1/decision.html',
-          controller:'kdmCtrl'
+          controller:'PublicCtrl'
       });
 }])
 

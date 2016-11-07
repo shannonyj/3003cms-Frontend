@@ -1,12 +1,14 @@
 var rootDjangoUrl = 'http://127.0.0.1:8000';
 
+var crisisController= new CrisisController();
+
 $(document).ready(function () {
-    setTimeout(function () { 
-    var searchBox = new google.maps.places.SearchBox($('#pac-input')[0]);
-    searchBox.addListener('places_changed', function () {
-        console.log(searchBox.getPlaces()[0]);
-        goToLocation(searchBox.getPlaces()[0].formatted_address);
-    });
+    setTimeout(function () {
+        var searchBox = new google.maps.places.SearchBox($('#pac-input')[0]);
+        searchBox.addListener('places_changed', function () {
+            console.log(searchBox.getPlaces()[0]);
+            goToLocation(searchBox.getPlaces()[0].formatted_address);
+        });
     }, 500);
 });
 function dehighlightAllAreas(hidePopup){

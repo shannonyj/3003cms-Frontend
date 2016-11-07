@@ -544,8 +544,7 @@ div.timeline-item p.timeline-item-location {
 }
 .unexpandedTimelineItem{
     padding-top: 3px;
-    height: 45px;
-    overflow: hidden;}
+    height: auto;}
 .overlay{
     position: fixed;
     top: 0;

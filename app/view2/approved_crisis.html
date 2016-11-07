@@ -1,33 +1,22 @@
   <script>
-      var mapManager;
       $(document).ready(function () {
-          setTimeout(function () {
-              $('.timeline li .timeline-item').click(function () {
-                  if ($(this).hasClass('unexpandedTimelineItem')) {
-                      $(this).removeClass('unexpandedTimelineItem', 500);
-                  }
-                  else {
-                      $(this).addClass('unexpandedTimelineItem', 350);
-                  }
-              });
-          }, 500);
       });
   </script>
 <h3 class="latestCrisisHeader">Latest crisis</h3>
     <ul class="timeline">
         <!-- timeline time label -->
         <!--ng-repeat="(date, value) in timeline | groupBy: 'date'"-->
-        <li class="time-label" ng-repeat-start="(time, items) in timeline | orderBy: '-time' | groupBy: 'time'">
+        <li class="time-label" href="#collapse1" ng-repeat-start="(time, items) in timeline | orderBy: '-time' | groupBy: 'time'">
                   <span class="bg-red">
                     {{time}}
                   </span>
         </li>
         <!-- /.timeline-label -->
         <!-- timeline item -->
-        <li ng-repeat="item in items" ng-repeat-end>
+        <li ng-repeat="item in items" ng-repeat-end id="collapse1">
             <div class="latestCrisisBubbleIconWrapper">
             <img src="images/zombieicon.png"/></div>
-            <div class="timeline-item unexpandedTimelineItem" ng-include="'view2/timeline/incident.html'"></div>
+            <div class="timeline-item unexpandedTimelineItem"  ng-include="'view2/timeline/incident.html'"></div>
             
 
         </li>

@@ -4,13 +4,22 @@ class CrisisController{
     approveCrisis(id){
         $.get(rootDjangoUrl + '/approveCrisis/' + id + '/');
     }
-    getPublicMap(callback){
+    submitCrisis(crisis){
         
     }
+    getPublicMap(callback){
+        $.get(rootDjangoUrl + '/getPublicApprovedCrisis/', function (rawJson) {
+            callback(rawJson);
+        });
+    }
     getApprovedMap(callback){
-    
+        $.get(rootDjangoUrl + '/getApprovedCrisis/', function (rawJson) {
+            callback(rawJson);
+        });
     }
     getReportingMap(callback){
-    
+        $.get(rootDjangoUrl + '/getUnapprovedCrisis/', function (rawJson) {
+            callback(rawJson);
+        });
     }
 }

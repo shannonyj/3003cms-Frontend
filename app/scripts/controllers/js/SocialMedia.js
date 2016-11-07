@@ -5,8 +5,8 @@
 
 (function() {
     'use strict';
-    angular.module('myApp').controller('timelineCtrl', function ($scope,$mdDialog) {
-        $scope.showAdvancedFb = function(ev) {
+    angular.module('myApp').controller('timelineCtrl', function ($scope,$mdDialog, social,CONSTANTS) {
+        $scope.showAdvancedFb = function(ev, id) {
             console.log('facebook');
 
             $mdDialog.show({
@@ -30,6 +30,12 @@
                 $scope.status = 'value'
             });
 
+            return social.facebook(id, $scope.status, function(data){
+                console.log(id);
+                console.log($scope.status);
+                console.log('Yes');
+            });
+
             /*
 
             $mdDialog.show(confirm).then(function(result) {
@@ -41,7 +47,7 @@
         };
 
         $scope.showAdvancedTwitter = function(ev) {
-            console.log('facebook');
+            console.log('Twitter');
 
             $mdDialog.show({
                 targetEvent: ev,
@@ -64,6 +70,12 @@
                 clickOutsideToClose:true,
             }).then(function(result){
                 $scope.status = 'value'
+            });
+
+            return social.facebook(id, $scope.status, function(data){
+                console.log(id);
+                console.log($scope.status);
+                console.log('Yes');
             });
         };
     });

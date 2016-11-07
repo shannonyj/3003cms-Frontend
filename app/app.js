@@ -60,6 +60,7 @@ myApp.constant('CONSTANTS', (function() {
     USERS_NAME: user[1],
     PASSWORD: user[2],
     TOKEN : 0,
+    ID: 0,
     USERDB: userdb
   }
 })());

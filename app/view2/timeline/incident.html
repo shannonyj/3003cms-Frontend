@@ -1,7 +1,7 @@
 <script src="scripts/map/generic_map.js" async defer></script>
 <script src="scripts/map/private_map.js" async defer></script>
 
-<span class="time"><i class="fa fa-clock-o"></i> {{item.displayTime}}</span>
+<span class="time"><i class="fa fa-clock-o"></i> {{item.time}}</span>
 
 <h3 class="timeline-header">New crisis event</h3>
 
@@ -10,7 +10,7 @@
     </p>
 
     <p class="timeline-item-detail timeline-item-type-title">Type:</p>
-    <p class="timeline-item-detail-content timeline-item-type">{{item.displayType}}</p>
+    <p class="timeline-item-detail-content timeline-item-type">{{item.type}}</p>
     <p class="timeline-item-detail timeline-item-location-title">Location:</p>
     <p class="timeline-item-detail-content timeline-item-location">{{item.location}}</p>
     <p class="timeline-item-detail timeline-item-severity-title">Severity:
@@ -29,8 +29,8 @@
     <p ng-show="item.description" class="timeline-item-detail-content">{{item.description}}</p>
     <div style="clear: both;"></div>
     <div style="padding-left: 60em;" ng-controller="timelineCtrl">
-                <a class="myButton1" ng-click="showAdvancedFb($event)">Post on Facebook</a>
-                <a class="myButton" ng-click="showAdvancedTwitter($event)">Post on Twitter</a>
+                <a class="myButton1" ng-click="showAdvancedFb($event, item.id)">Post on Facebook</a>
+                <a class="myButton" ng-click="showAdvancedTwitter($event, item.id)">Post on Twitter</a>
     </div>
 </div>
 <div class="timeline-footer"></div>

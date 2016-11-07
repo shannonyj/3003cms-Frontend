@@ -582,4 +582,5 @@ div.timeline-item p.timeline-item-location {
     margin-bottom: 2px;
     border-left: 2px solid #e6e7e8;
     color: #444;
+    cursor: pointer;
 }

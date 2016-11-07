@@ -1,5 +1,6 @@
 
     var mapManager;
+    var crisisController;
     $(document).ready(function () {
         $('.to-do-list-dispatch .close,#approve-dispatch-cancel').click(function () {
             $('.to-do-list-dispatch,.overlay').hide();
@@ -7,7 +8,9 @@
         setTimeout(function () {
             loadMapFromUrl(rootDjangoUrl + '/' + $('.mapType').val());
         }, 500);
-
+        setTimeout(function () { 
+            loadToDoList();
+        }, 1000);
         $('.mapInfoPopupInnerWrapper .infoBtn').click(function () {
             var areaData = $('.mapInfoPopup').data('area');
             $('.crisisInfoForm .crisisName').text(mapManager.getDisasterName(areaData.disaster));
@@ -47,7 +50,6 @@
             $('.crisisApprovalForm,.overlay').hide();
         });
         $('#approveCrisisFormBtn').click(function () {
-            console.log('approved');
             $.get(rootDjangoUrl + '/approveCrisis/' + $('.crisisApprovalForm').data('area').id + '/', function () {
             });
             $('.crisisApprovalForm').data('area').polygon.setMap(null);
@@ -58,6 +60,9 @@
         });
         $('.mapType').change(function () {
             loadMapFromUrl(rootDjangoUrl + '/' + $(this).val());
+            setTimeout(function () { 
+                loadToDoList();
+            }, 500);
         });
         $('.archiveCrisisBtn').click(function () {
             var area = $(this).data('area');
@@ -65,6 +70,33 @@
             $.get(rootDjangoUrl + '/closeCrisis/' + area.id + '/');
         });
     });
+    function loadToDoList(){
+        var toDoItems = [];
+        $('.toDoItems').empty();
+        for (var i = 0; i < mapManager.areaManager.currentAreas.length; i++){
+            console.log(mapManager.areaManager.currentAreas[i].approved);
+            if (!mapManager.areaManager.currentAreas[i].approved || mapManager.areaManager.currentAreas[i] == null)
+                toDoItems.push(mapManager.areaManager.currentAreas[i]);
+        }
+        toDoItems.reverse();
+        for (var i = 0; i < toDoItems.length; i++) {
+            var area = toDoItems[i];
+            var approved = area.approved;
+            var newItem = $('<li><span class="handle-disabled">\
+                    <i class="fa fa-ellipsis-v"></i>\
+                    <i class="fa fa-ellipsis-v"></i>\
+                    </span><span>&lt;' + toDoItems[i].name + '&gt;: <span class="typeText">Dispatch</span></span>\
+                        <small class="label label label-primary ng-scope"><i class="fa fa-clock-o"></i> <span am-time-ago="todo.time"></span></small>\
+                    </li>');
+            $('.typeText').text(approved ? 'Dispatch': 'Crisis');
+            $('.toDoItems').append(newItem);
+            newItem.click(function () {
+                if (!approved) {
+                    loadApprovalForm(area);
+                }
+            });
+        }
+    }
     function loadMap(raw) {
         mapManager.loadMap(raw);
     }
@@ -109,7 +141,6 @@
                 $('.createMapDispatchInfoPopup').hide();
             }
         };
-
     }
     function loadApprovalForm(area) {
         $('.crisisApprovalForm').data('area', area);

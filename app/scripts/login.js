@@ -3,7 +3,7 @@
  */
 (function() {
     'use strict';
-
+    
     /**
      * @ngdoc function
      * @name tbcCmsFrontApp.controller:AboutCtrl
@@ -38,11 +38,11 @@
                         if (1) {
                             switch (data[$scope.loginData.username].type) {
                                 case "kdm":
-                                    return $window.location.assign("/3003cms/app/#/kdm");
+                                    return $window.location.assign("#/kdm");
                                 case "operator":
-                                    return $window.location.assign("/3003cms/app/#/operator");
+                                    return $window.location.assign("#/operator");
                                 default:
-                                    return $window.location.assign("/3003cms/app/#/public");
+                                    return $window.location.assign("#/public");
                             }
                         } else {
                             console.log('this is wrong');

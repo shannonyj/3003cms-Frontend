@@ -7,6 +7,7 @@
 
 body {
   padding: 0;
+  top: 0 !important;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -94,4 +95,12 @@ body {
 }
 .dragover {
   border: 5px dashed blue;
+}
+
+.md-dialog-is-showing {
+  top: 0 !important;
+}
+
+body.skin-blue.sidebar-mini.ng-scope.md-dialog-is-showing {
+  top: 0 !important;
 }

@@ -38,12 +38,31 @@
                 '<md-radio-button value="Central">Central</md-radio-button>' +
                 '</md-radio-group>' +
                 '<br>' +
-                '<md-button style="margin-right:20px;">Post it now</md-button>' +
+                '<md-button style="margin-right:20px;" ng-click="answer(\'useful\')">Post it now</md-button>' +
                 '<br><br>',
                 clickOutsideToClose:true,
-            }).then(function(result){
+            }).then(function(){
                 $scope.status = 'value'
+                social.facebook(id, $scope.status, function(data){
+                    console.log(id);
+                    console.log($scope.status);
+                    console.log('Yes');
+                });
             });
+
+            function DialogController($scope, $mdDialog) {
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+
+                $scope.answer = function(answer) {
+                    $mdDialog.hide(answer);
+                };
+            }
 
             return social.facebook(id, $scope.status, function(data){
                 console.log(id);
@@ -60,6 +79,7 @@
             });
             */
         };
+
 
         $scope.showAdvancedTwitter = function(ev) {
             console.log('Twitter');
@@ -80,18 +100,18 @@
                 '<md-radio-button value="Central">Central</md-radio-button>' +
                 '</md-radio-group>' +
                 '<br>' +
-                '<md-button style="margin-right:20px;">Post it now</md-button>' +
+                '<md-button style="margin-right:20px;" ng-click="hide()">Post it now</md-button>' +
                 '<br><br></div>',
                 clickOutsideToClose:true,
             }).then(function(result){
-                $scope.status = 'value'
+                $scope.status = 'value';
+                social.facebook(id, $scope.status, function(data){
+                    console.log(id);
+                    console.log($scope.status);
+                    console.log('Yes');
+                });
             });
-
-            return social.facebook(id, $scope.status, function(data){
-                console.log(id);
-                console.log($scope.status);
-                console.log('Yes');
-            });
+            return;
         };
     });
 }).call(this);

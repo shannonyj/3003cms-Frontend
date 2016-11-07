@@ -6,7 +6,7 @@
     angular.module('myApp').service('social', function ($http, CONSTANTS) {
         var facebook, twitter;
         facebook = function (id, loc, callback) {
-            return $.post(rootDjangoUrl + '/sendToFacebook/' + id, loc)
+            return $http.post(rootDjangoUrl + '/sendToFacebook/' + id, loc)
                 .success((function (data, status, headers, config) {
                     console.log('success to post');
                     //CONSTANTS.TOKEN = 1;

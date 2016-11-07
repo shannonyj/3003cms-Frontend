@@ -29,11 +29,9 @@
     <p ng-show="item.description" class="timeline-item-detail-content">{{item.description}}</p>
     <div style="clear: both;"></div>
     <div style="padding-left: 60em;" ng-controller="timelineCtrl">
-        <md-button class="md-primary md-raised" ng-click="showAlert($event)"   >
-            This is a test!
-        </md-button>
+        <div id="popupContainer">
                 <a class="myButton1" ng-click="showAdvancedFb($event, item.id)">Post on Facebook</a>
                 <a class="myButton" ng-click="showAdvancedTwitter($event, item.id)">Post on Twitter</a>
+        </div>
     </div>
-</div>
-<div class="timeline-footer"></div>
+<div class="timeline-footer"></div></div>

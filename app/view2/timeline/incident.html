@@ -1,3 +1,6 @@
+<script src="scripts/map/generic_map.js" async defer></script>
+<script src="scripts/map/private_map.js" async defer></script>
+
 <span class="time"><i class="fa fa-clock-o"></i> {{item.displayTime}}</span>
 
 <h3 class="timeline-header">New crisis event</h3>
@@ -22,7 +25,7 @@
     <div style="clear: both;"></div>
     <p ng-show="item.description" class="timeline-item-detail">Details:</p>
 
-    
+
     <p ng-show="item.description" class="timeline-item-detail-content">{{item.description}}</p>
     <div style="clear: both;"></div>
     <div style="padding-left: 60em;" ng-controller="timelineCtrl">

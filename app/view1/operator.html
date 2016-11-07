@@ -1,3 +1,5 @@
+<script src="scripts/map/MapManager.js"></script>
+
 <div class="wrapper">
     <div>
         <header class="main-header">
@@ -29,11 +31,11 @@
     </div>
     <div class="map" ng-include="'view2/private_map.html'"></div>
     <!--Location Sample-->
-    {{$root.incidents}}
+    <div>This is a test. {{timeline}}</div>
     <div ng-repeat="incident in $root.incidents">{{incident.location}} - {{incident.name}}</div>
+    <div class="map" ng-include="'view2/approved_crisis.html'">
 
-            <div class="map" ng-include="'view2/approved_crisis.html'">
-</div>
+    </div>
 </section><!-- /.content -->
 <script src="scripts/controllers/js/timeline.js"></script>
 

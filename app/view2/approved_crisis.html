@@ -17,9 +17,9 @@
     <ul class="timeline">
         <!-- timeline time label -->
         <!--ng-repeat="(date, value) in timeline | groupBy: 'date'"-->
-        <li class="time-label" ng-repeat-start="(date, items) in timeline | orderBy: '-time' | groupBy: 'date'">
+        <li class="time-label" ng-repeat-start="(time, items) in timeline | orderBy: '-time' | groupBy: 'time'">
                   <span class="bg-red">
-                    {{date}}
+                    {{time}}
                   </span>
         </li>
         <!-- /.timeline-label -->

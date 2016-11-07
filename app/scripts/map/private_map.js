@@ -31,7 +31,7 @@ $(document).ready(function () {
         $('.modifyAreaForm').hide();
     });
     setTimeout(function () {
-        loadMapFromUrl(rootDjangoUrl + '/' + $('.mapType').val());
+        //loadMapFromUrl(rootDjangoUrl + '/' + $('.mapType').val());
     }, 500);
 
     $('#submitFormBtn').click(function () {
